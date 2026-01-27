@@ -1,0 +1,265 @@
+# 📐 Project Brief: Professional & Academic Training Platform
+
+> **Project:** MCI Training Platform (Data Centers · Business Continuity · Cybersecurity)  
+> **Date:** January 27, 2026  
+> **Status:** Brief project for web developer
+
+---
+
+## 1️⃣ Global UX Principles
+
+### Content & Readability
+*   **Typography:** High contrast. All non-heading text must be **Black (#000000 or #111111)**. No grey body text to ensure maximum readability.
+*   **Background:** Clean **White (#FFFFFF)** background.
+*   **Style:** Long-form, academic-style content is fully supported and encouraged.
+
+### Layout
+*   **Alignment:** Centered content with a max-width of **1140–1240px**.
+*   **Spacing:** Clear vertical spacing to reduce cognitive load.
+*   **Grouping:** Use card-based grouping sparingly, with **light grey** backgrounds only.
+
+### Navigation Strategy
+*   **Structure:** Multi-level navigation.
+*   **Organization:** Courses are grouped by **program type** (e.g., Data Center, Risk), not marketing terms.
+*   **Audience Segmentation:** Clear visual or navigational separation between:
+    *   Individual Learners
+    *   Corporate Clients
+    *   Partners / Resellers
+
+### Navbar Menu Structure
+*   **Left:** Brand Logo (Home link).
+*   **Center (Main Navigation):**
+    *   **Programs** (Dropdown/Mega Menu):
+        *   Data Center
+        *   Business Continuity
+        *   Cybersecurity
+    *   **Corporate Services**
+    *   **About Us**
+    *   **Resources**
+*   **Right (Utility & Action):**
+    *   🔍 Search
+    *   **Contact** (Text Link or Secondary Button)
+    *   **Enquire / Apply** (Primary Button - Amber)
+
+---
+
+## 2️⃣ Sitemap Structure
+
+### 🏠 Home
+**Purpose:** Orientation, credibility, and fast discovery.
+
+*   **Hero Statement:** Clear, professional value proposition.
+*   **Core Program Areas:**
+    1.  Data Center Programs
+    2.  Business Continuity & Resilience
+    3.  Cybersecurity & Risk
+*   **Featured Courses:** Highlighted top-tier offerings.
+*   **Value Proposition:** "Why train with us?"
+*   **Trust Signals:** Industry & accreditation logos.
+*   **Primary CTAs:** Apply / Enquire / Partner.
+
+### 📘 About Us
+**Purpose:** Establishing institutional trust.
+
+*   Mission and Vision
+*   Training Philosophy
+*   Instructor & Advisory Profiles
+*   Partner Ecosystem
+*   **UX Note:** Text-forward layout, minimal visual decoration, white background.
+
+### 🎓 Programs (Top-Level)
+**Groupings:**
+1.  Professional Programs
+2.  Academic & Credit-Bearing Courses
+3.  Short Courses & Workshops
+4.  Corporate Training
+
+> *Each group leads to a dedicated landing page, then to individual course pages.*
+
+### 🧠 Program Category Pages
+*   **Content:** Category overview, Intended audience, Course listings, Learning outcomes, Certification pathways.
+*   **UX:** Course cards in grid format. Clear hierarchy. Hover and label accents only (no body color changes).
+
+### 📄 Individual Course Page
+**Core Sections:**
+*   Course Title & Category
+*   Overview & Learning Objectives
+*   Target Audience
+*   Delivery Format, Duration & Schedule
+*   Certification / Credits
+*   Instructor Profile
+*   **Enrolment CTA**
+
+**UX Note:** Structured, scannable layout. Clear CTAs. **Print-friendly design.**
+
+### 🏢 Corporate & Reseller Partnerships
+**Purpose:** Commercial engagement.
+
+*   **Content:** Corporate training offerings, Partnership models, Marketing support, Enquiry form.
+*   **UX:** Professional tone, Icon-supported sections, White background.
+
+### 📚 Resources / Insights
+**Purpose:** Authority and SEO.
+
+*   **Content:** Articles, Industry insights, Webinars, Events.
+*   **UX:** Simple listing or card layout. Filter by topic. Clear typography.
+
+### ❓ Admissions / FAQ
+*   Application steps & Entry requirements.
+*   Corporate vs. Individual enrolment.
+*   Certification validity.
+
+### 📞 Contact
+*   Structured enquiry form with **Enquiry Type Selector**.
+*   Clear contact details.
+
+---
+
+## 3️⃣ UI Color System (Final)
+
+### Color Palette
+
+| Usage | Color Name | Hex Code | Visual Sample |
+| :--- | :--- | :--- | :--- |
+| **Primary UI** | Navy | `#0F2A44` | 🟦 |
+| **Secondary** | Teal | `#1F8A8A` | 🟩 |
+| **Accent (CTA)** | Amber | `#F5A623` | 🟧 |
+| **Background** | White | `#FFFFFF` | ⬜ |
+| **Body Text** | Black | `#000000` / `#111111` | ⬛ |
+| **Cards** | Light Grey | `#F4F6F8` | ⬜ |
+| **Borders** | Grey | `#E5E7EB` | ⬜ |
+
+### Usage Rules
+> [!IMPORTANT]
+> *   **Accent color (Amber)** is strictly for **actions** (buttons, links).
+> *   **Teal** is for icons, labels, and hover states only.
+> *   **No colored paragraph backgrounds.** keep it clean.
+
+---
+
+## 4️⃣ Overall UX Tone
+
+*   **Academic & Professional:** The design should convey authority and seriousness.
+*   **Enterprise-Ready:** Suitable for corporate decision-makers.
+*   **Calm & Trustworthy:** No aggressive marketing tactics.
+*   **Minimal Visual Noise:** Focus on the content.
+
+---
+
+
+
+
+
+---
+
+## 7️⃣ Marketing & Conversion Features
+
+### 📅 Training Calendar (Global)
+*   **Centralized View:** A dedicated page showing availability across all courses.
+*   **Filters:** Filter by Date, Location, and Topic.
+*   **Status Indicators:** "Guaranteed to Run" (Green), "Limited Seats" (Amber), "Sold Out" (Grey).
+
+### 🚀 High-Conversion Scheduling (Course Pages)
+*   **Dynamic Slots:** Real-time seat availability (e.g., "Only 3 seats left").
+*   **Smart Timezones:** Auto-detect user's timezone for virtual classes.
+*   **Guaranteed to Run (GTR):** Visual badge for confirmed sessions to boost corporate confidence.
+
+### 🎣 Lead Generation
+*   **Brochure Downloads:** "Download Full Syllabus" (requires email capture).
+*   **Waitlist:** Alert me when new dates are added (for sold-out/unscheduled items).
+*   **Bulk Booking:** "Request a Team Quote" CTA distinct from individual enrolment.
+
+### 🏆 Trust & Social Proof
+*   **Alumni Showcase:** Logos of companies (e.g., Google, Amazon) where alumni work.
+*   **Video Testimonials:** Embedded on About and Course pages.
+*   **Urgency Banners:** Global sticky bar for upcoming deadlines or early-bird offers.
+
+---
+
+## 8️⃣ Content Strategy
+
+### Voice & Tone
+*   **Authoritative:** We are industry leaders. Use precise terminology (no fluff).
+*   **Approachable:** Complex topics (Cybersecurity, BCM) should be explained clearly.
+*   **Professional:** Avoid slang. Use active voice. "We train professionals," not "Get trained by us."
+
+### Governance
+*   **Review Cycle:** All course content requires Subject Matter Expert (SME) sign-off every 6 months.
+*   **Localization:** Content must be structure-ready for future translation (avoid text in images).
+
+---
+
+## 9️⃣ Conceptual Content Models
+
+### 🎓 Course (The Core Product)
+*   **Attributes:** Title, Code, Difficulty Level (Beginner/Expert), Duration (Days), Method (Virtual/Classroom).
+*   **Relationships:** Linked to *Instructor*, *Category*, and *Upcoming Schedules*.
+*   **Assets:** PDF Syllabus, Promotional Video.
+
+### 👨‍🏫 Instructor (The Authority)
+*   **Attributes:** Name, Job Title, Bio (Short/Long), LinkedIn Profile.
+*   **Social Proof:** "Courses Taught", "Years of Experience".
+
+### 📅 Training Event (The Inventory)
+*   **Attributes:** Start Date, End Date, Timezone, City/Virtual Link, Seats Capacity.
+*   **Status:** Open, Filling Fast, Waitlist Only, Closed.
+
+---
+
+## 🔟 Key User Use Cases
+
+### 👤 The Individual Learner
+> *"I need to get certified to get a promotion."*
+*   **Goal:** Find a course -> Check dates -> Convince boss (Download Syllabus) -> Book.
+*   **Key Content:** Certification validity, clear pricing, verified dates.
+
+### 💼 The Corporate Decision Maker
+> *"I need to train my team of 10 engineers."*
+*   **Goal:** Validate training quality -> Check instructor credibility -> Request bulk quote.
+*   **Key Content:** "Guaranteed to Run" status, Instructor bios, Client logos (Social Proof).
+
+---
+
+## 1️⃣1️⃣ UX Behaviour & Interactions
+
+### 🧭 Navigation Mechanics
+*   **Sticky Header:** The main navigation bar remains visible (sticky) as the user scrolls, potentially compacting slightly. To maximize screen real estate, it can hide on scroll down and reappear on scroll up.
+*   **Mega Menu Delays:** Dropdown menus should have a slight delay (e.g., 300ms) before closing when the mouse leaves, preventing accidental closing during diagonal mouse movement.
+*   **Mobile Menu:** A smooth slide-out drawer from the right side. The "Hamburger" icon transforms into an "X" close icon.
+
+### ✨ Micro-interactions
+*   **Buttons:** Primary buttons should have a subtle scale (98%) or background shade shift on click (active state) to provide tactile feedback. Hover states should lift slightly or brighten.
+*   **Cards:** Course cards should have a subtle elevation lift (box-shadow expansion) on hover to indicate clickability.
+*   **Links:** Text links in paragraphs should have a distinct underline animation (e.g., left-to-right underline growth) on hover.
+
+### 🔄 Feedback Loops
+*   **Form Validation:** Inline validation (Green check / Red cross) appears immediately after a field loses focus (onBlur). Error messages should be descriptive.
+*   **Loading States:** Use "Skeleton Screens" (grey placeholders) for loading content (e.g., course lists) instead of generic spinners, to reduce perceived load time.
+*   **Action Feedback:** When a form is submitted, the button should show a spinner, then transition to a "Success" state (e.g., "Sent!").
+
+### 🎬 Transitions
+*   **Page Transitions:** A very subtle fade-in transition when navigating between pages.
+*   **Modals:** Use a backdrop blur with a gentle slide-up or fade-in animation for modal dialogs (e.g., "Request Quote").
+
+---
+
+## 1️⃣2️⃣ Prototype & Interactivity Requirements
+
+### 🖱️ Clickable High-Fidelity Dummy
+*   **No Dead Ends:** Every button, link, and interactive element MUST be clickable and lead to a relevant state or page.
+*   **Deep Linking:**
+    *   **Trainer Profiles:** Clicking a trainer's name/photo must open a detailed profile modal or page.
+    *   **Schedule Selection:** Clicking a "Select Date" button must toggle an active state and update the pricing/summary section.
+    *   **Course Drill-down:** Clicking a course card must lead to the full Course Detail page.
+
+### 🚫 No "Empty States"
+*   **Populated Data:** No section should display "Coming Soon" or empty placeholders.
+    *   **Schedules:** All courses must have at least 3 future dates listed.
+    *   **Testimonials:** Must use realistic text and photos, not "Lorem Ipsum".
+    *   **Blog/Resources:** Must have at least 5 populated articles with thumbnails.
+*   **Visual Completeness:** The prototype must feel like a live, production-ready site to the user.
+
+### 📸 Visual Assets
+*   **High-Quality Placeholders:** Use high-resolution dummy images from **Unsplash** or **Pexels**.
+*   **Relevance:** Images must match the context (e.g., corporate meeting rooms for "Business Continuity", server racks for "Data Center").
+*   **No Placeholders:** Avoid grey boxes with dimensions (e.g., "400x300"). use real images only.
