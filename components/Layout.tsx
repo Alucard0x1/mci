@@ -119,21 +119,19 @@ const Navbar = () => {
         <TopBanner />
         <nav 
           className={`w-full transition-all duration-300 border-b ${
-            isScrolled ? 'bg-white/95 backdrop-blur-sm py-2 shadow-md border-gray-200' : 'bg-white py-4 border-transparent'
+            isScrolled ? 'bg-mci-navy py-2 shadow-md border-mci-navy' : 'bg-white py-4 border-transparent'
           }`}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               {/* Logo */}
               <div className="flex-shrink-0 flex items-center">
-                <Link to="/" className="flex items-center gap-2 group">
-                  <div className="w-10 h-10 bg-mci-navy rounded-sm flex items-center justify-center text-white font-bold text-xl group-hover:bg-mci-teal transition-colors">
-                    MCI
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-mci-navy font-bold text-lg leading-tight tracking-tight">MCI TRAINING</span>
-                    <span className="text-xs text-gray-500 tracking-widest uppercase">Institute</span>
-                  </div>
+                <Link to="/" className="flex items-center group">
+                  <img 
+                    src={isScrolled ? '/mciwhite.png' : '/mcired.png'} 
+                    alt="MCI Training Institute" 
+                    className="h-10 w-auto transition-all duration-300"
+                  />
                 </Link>
               </div>
 
@@ -145,7 +143,7 @@ const Navbar = () => {
                   onMouseLeave={handleMenuLeave}
                 >
                   <button 
-                    className={`text-mci-text hover:text-mci-teal font-medium flex items-center gap-1 py-2 ${isProgramMenuOpen ? 'text-mci-teal' : ''}`}
+                    className={`${isScrolled ? 'text-white' : 'text-mci-text'} hover:text-mci-teal font-medium flex items-center gap-1 py-2 ${isProgramMenuOpen ? 'text-mci-teal' : ''}`}
                   >
                     Programs <ChevronDown size={16} className={`transition-transform duration-300 ${isProgramMenuOpen ? 'rotate-180' : ''}`} />
                   </button>
@@ -229,20 +227,20 @@ const Navbar = () => {
                   </div>
                 </div>
 
-                <Link to="/corporate" className="text-mci-text hover:text-mci-teal font-medium transition-colors">Corporate</Link>
-                <Link to="/about" className="text-mci-text hover:text-mci-teal font-medium transition-colors">About Us</Link>
-                <Link to="/resources" className="text-mci-text hover:text-mci-teal font-medium transition-colors">Resources</Link>
+                <Link to="/corporate" className={`${isScrolled ? 'text-white' : 'text-mci-text'} hover:text-mci-teal font-medium transition-colors`}>Corporate</Link>
+                <Link to="/about" className={`${isScrolled ? 'text-white' : 'text-mci-text'} hover:text-mci-teal font-medium transition-colors`}>About Us</Link>
+                <Link to="/resources" className={`${isScrolled ? 'text-white' : 'text-mci-text'} hover:text-mci-teal font-medium transition-colors`}>Resources</Link>
               </div>
 
               {/* Right Utilities */}
               <div className="hidden md:flex items-center space-x-6">
                 <button 
                   onClick={() => setIsSearchOpen(true)}
-                  className="text-gray-500 hover:text-mci-teal transition-colors"
+                  className={`${isScrolled ? 'text-gray-300' : 'text-gray-500'} hover:text-mci-teal transition-colors`}
                 >
                   <Search size={20} />
                 </button>
-                <Link to="/contact" className="text-mci-navy font-medium hover:underline decoration-mci-teal underline-offset-4">
+                <Link to="/contact" className={`${isScrolled ? 'text-white' : 'text-mci-navy'} font-medium hover:underline decoration-mci-teal underline-offset-4`}>
                   Contact
                 </Link>
                 <Link 
@@ -335,8 +333,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="col-span-1 md:col-span-1">
              <div className="flex items-center gap-2 mb-6">
-                <div className="w-8 h-8 bg-white/10 rounded-sm flex items-center justify-center text-white font-bold">M</div>
-                <span className="font-bold text-xl tracking-tight">MCI TRAINING</span>
+                <img src="/mciwhite.png" alt="MCI Training Institute" className="h-8 w-auto" />
               </div>
             <p className="text-gray-300 text-sm leading-relaxed mb-6">
               Empowering professionals with accredited training in Data Centers, Business Continuity, and Cybersecurity.
