@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { AuthProvider } from './lib/AuthContext';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import CourseDetail from './pages/CourseDetail';
@@ -10,6 +11,8 @@ import About from './pages/About';
 import Resources from './pages/Resources';
 import Admissions from './pages/Admissions';
 import Corporate from './pages/Corporate';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
 
 // Scroll to top on route change
 const ScrollToTop = () => {
@@ -22,22 +25,33 @@ const ScrollToTop = () => {
 
 const App = () => {
   return (
-    <Router>
-      <ScrollToTop />
-      <Layout>
+    <AuthProvider>
+      <Router>
+        <ScrollToTop />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/courses/:id" element={<CourseDetail />} />
-          <Route path="/programs/:categoryId" element={<ProgramCategory />} />
-          <Route path="/calendar" element={<Calendar />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/corporate" element={<Corporate />} /> 
-          <Route path="/about" element={<About />} />
-          <Route path="/resources" element={<Resources />} />
-          <Route path="/admissions" element={<Admissions />} />
+          {/* Auth pages — no Layout wrapper */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+
+          {/* Public pages — with Layout */}
+          <Route path="/*" element={
+            <Layout>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/courses/:id" element={<CourseDetail />} />
+                <Route path="/programs/:categoryId" element={<ProgramCategory />} />
+                <Route path="/calendar" element={<Calendar />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/corporate" element={<Corporate />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/resources" element={<Resources />} />
+                <Route path="/admissions" element={<Admissions />} />
+              </Routes>
+            </Layout>
+          } />
         </Routes>
-      </Layout>
-    </Router>
+      </Router>
+    </AuthProvider>
   );
 };
 
