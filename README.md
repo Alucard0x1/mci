@@ -55,8 +55,8 @@ Runs on `http://localhost:3000`.
 | Page | URL |
 |---|---|
 | Homepage | `http://localhost:3000` |
-| Login | `http://localhost:3000/#/login` |
-| Dashboard | `http://localhost:3000/#/dashboard` |
+| Login | `http://localhost:3000/login` |
+| Dashboard | `http://localhost:3000/dashboard` |
 
 ## Login Credentials
 
