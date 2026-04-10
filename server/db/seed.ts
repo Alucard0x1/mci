@@ -5,7 +5,6 @@ import { v4 as uuid } from 'uuid';
 export function seed() {
   const db = initDb();
 
-  // Check if already seeded
   const userCount = db.prepare('SELECT COUNT(*) as c FROM users').get() as any;
   if (userCount.c > 0) {
     console.log('Database already seeded, skipping.');
@@ -20,182 +19,90 @@ export function seed() {
   db.prepare('INSERT INTO users (id, email, password_hash, name, role) VALUES (?, ?, ?, ?, ?)')
     .run(adminId, 'admin@mci-training.com', hash, 'Admin User', 'admin');
 
-  // --- Instructors ---
+  // --- Instructors (placeholder from prospectus) ---
   const instructors = [
-    { id: 'dr-smith', name: 'Dr. Sarah Smith', title: 'Senior Cybersecurity Analyst', bio: 'Former CISO with 20 years of experience in critical infrastructure protection. Sarah has led security operations for Fortune 500 financial institutions and is a regular keynote speaker at Black Hat and RSA.', image_url: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200' },
-    { id: 'eng-jones', name: 'Michael Jones, CDCP', title: 'Data Center Infrastructure Specialist', bio: 'Lead auditor for ISO 22237 certification bodies globally. Michael has overseen the design and build of over 50MW of data center capacity across Europe and Asia.', image_url: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200' },
-    { id: 'lisa-wong', name: 'Lisa Wong, MBCI', title: 'Business Resilience Consultant', bio: 'Expert in operational risk management for financial institutions. Lisa serves on the technical committee for ISO 22301 updates and advises government bodies on resilience strategies.', image_url: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=200' },
-    { id: 'james-chen', name: 'James Chen, CISSP', title: 'Cloud Security Architect', bio: 'Specializing in zero-trust architecture and cloud migration strategies for enterprise. James brings 15 years of hands-on experience in hybrid cloud environments.', image_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200' },
+    { id: 'expert-1', name: 'Industry Expert 1', title: 'Senior Practitioner', bio: 'Industry practitioner with extensive experience in mission-critical infrastructure.' },
+    { id: 'expert-2', name: 'Industry Expert 2', title: 'Senior Consultant', bio: 'Experienced consultant specializing in operational resilience and continuity planning.' },
+    { id: 'expert-3', name: 'Industry Expert 3', title: 'Technical Director', bio: 'Technical director with deep expertise in data center design and cybersecurity.' },
+    { id: 'expert-4', name: 'Industry Expert 4', title: 'Principal Advisor', bio: 'Principal advisor on digital infrastructure strategy and risk management.' },
+  ];
+  const insInstructor = db.prepare('INSERT INTO instructors (id, name, title, bio) VALUES (?, ?, ?, ?)');
+  for (const i of instructors) insInstructor.run(i.id, i.name, i.title, i.bio);
+
+  // --- Courses from MCI Prospectus ---
+  const courses = [
+    // ===== BUSINESS CONTINUITY MANAGEMENT =====
+    // Foundation
+    { id: 'bcm-f5-l1-001', code: 'BCM-F5-L1-001', title: 'Level 1 - Foundation Course leading to Organisation & Digital Resilience Leader (ODRL)', program: 'Business Continuity', level: 'Foundation', duration: '5 Days', format: 'Classroom' },
+    { id: 'bcm-f5-l2-002', code: 'BCM-F5-L2-002', title: 'Level 2 - Intermediate Specialist Tracks leading to Organisation & Digital Resilience Specialist (ODRS)', program: 'Business Continuity', level: 'Foundation', duration: '5 Days', format: 'Classroom' },
+    { id: 'bcm-f5-l2-003', code: 'BCM-F5-L2-003', title: 'Level 2 - Intermediate Specialist Tracks leading to Organisation & Digital Resilience Crisis Leader (ODRCL)', program: 'Business Continuity', level: 'Foundation', duration: '5 Days', format: 'Classroom' },
+    { id: 'bcm-f5-l3-004', code: 'BCM-F5-L3-004', title: 'Level 3 - Advanced Practitioner Elite leading to Organisation & Digital Resilience Crisis Simulation & Exercise Professional (ODRCSEP)', program: 'Business Continuity', level: 'Foundation', duration: '5 Days', format: 'Classroom' },
+    // Continuing Education (Online Modular)
+    { id: 'bcm-s1-001', code: 'BCM-S1-001', title: 'Business Continuity Management Framework', program: 'Business Continuity', level: 'Continuing Education', duration: '1 Day', format: 'Online Modular' },
+    { id: 'bcm-s1-002', code: 'BCM-S1-002', title: 'Modern BIA & Operational Resilience Analytics', program: 'Business Continuity', level: 'Continuing Education', duration: '1 Day', format: 'Online Modular' },
+    { id: 'bcm-s1-003', code: 'BCM-S1-003', title: 'Risk Assessment for Today\'s BCM Integrated Critical Infrastructure Risk Management', program: 'Business Continuity', level: 'Continuing Education', duration: '1 Day', format: 'Online Modular' },
+    { id: 'bcm-s1-004', code: 'BCM-S1-004', title: 'BCM in the Age of Cyber, AI Disruption & Emerging Future Threats', program: 'Business Continuity', level: 'Continuing Education', duration: '1 Day', format: 'Online Modular' },
+    { id: 'bcm-s2-001', code: 'BCM-S2-001', title: 'BCM for Data Centers', program: 'Business Continuity', level: 'Continuing Education', duration: '2 Days', format: 'Online Modular' },
+    { id: 'bcm-s3-001', code: 'BCM-S3-001', title: 'BCM: Business Continuity Management Leaders Workshop', program: 'Business Continuity', level: 'Continuing Education', duration: '3 Days', format: 'Online Modular' },
+    { id: 'bcm-s3-002', code: 'BCM-S3-002', title: 'Internal Auditor for ISO22301 Business Continuity Management Systems', program: 'Business Continuity', level: 'Continuing Education', duration: '3 Days', format: 'Online Modular' },
+    // Diploma
+    { id: 'bcm-dip-001', code: 'BCM-DIP-001', title: 'Diploma in Organisation & Digital Resilience', program: 'Business Continuity', level: 'Diploma', duration: '48 Days', format: 'Classroom' },
+    // Advanced Diploma
+    { id: 'bcm-adip-001', code: 'BCM-ADIP-001', title: 'Advanced Diploma in Integrated Organisation & Digital Resilience', program: 'Business Continuity', level: 'Advanced Diploma', duration: '48 Days', format: 'Classroom' },
+    // Executive Diploma
+    { id: 'bcm-edip-001', code: 'BCM-EDIP-001', title: 'Executive Diploma in Strategic BCM for Integrated Organisation & Digital Resilience Leadership at National Level', program: 'Business Continuity', level: 'Executive Diploma', duration: '48 Days', format: 'Classroom' },
+
+    // ===== DATA CENTERS =====
+    // Foundation
+    { id: 'ngdc-f5-001', code: 'NGDC-F5-001', title: 'Foundations of Applied Data Center Operations & Infrastructure', program: 'Data Center', level: 'Foundation', duration: '5 Days', format: 'Classroom' },
+    { id: 'ngdc-f5-002', code: 'NGDC-F5-002', title: 'Lifecycle of Mission-Critical Data Centers', program: 'Data Center', level: 'Foundation', duration: '5 Days', format: 'Classroom' },
+    // Continuing Education (Online Modular)
+    { id: 'ngdc-s1-001', code: 'NGDC-S1-001', title: 'Applied AI Data Centers Overview (Strategic Awareness)', program: 'Data Center', level: 'Continuing Education', duration: '1 Day', format: 'Online Modular' },
+    { id: 'ngdc-s1-002', code: 'NGDC-S1-002', title: 'Applied Data Centers: Mission-Critical & Operational Resilience Essentials (Strategic Awareness)', program: 'Data Center', level: 'Continuing Education', duration: '1 Day', format: 'Online Modular' },
+    { id: 'ngdc-s1-003', code: 'NGDC-S1-003', title: 'Applied Data Centers: Sustainability & Energy Strategy in Data Centres (Strategic Awareness)', program: 'Data Center', level: 'Continuing Education', duration: '1 Day', format: 'Online Modular' },
+    { id: 'ngdc-s1-004', code: 'NGDC-S1-004', title: 'Applied Data Centers: AI Workloads & High-Density Infrastructure (Strategic Awareness)', program: 'Data Center', level: 'Continuing Education', duration: '1 Day', format: 'Online Modular' },
+    { id: 'ngdc-s3-001', code: 'NGDC-S3-001', title: 'Applied Data Centers: Technical Foundation Course (with Hands-on in Data Center Lab): Mission-Critical & Operational Resilience Essentials', program: 'Data Center', level: 'Continuing Education', duration: '3 Days', format: 'Online Modular' },
+    // Diploma
+    { id: 'ngdc-dip-001', code: 'NGDC-DIP-001', title: 'Diploma in Digital & Mission-Critical Data Centre Engineering & Operations', program: 'Data Center', level: 'Diploma', duration: '48 Days', format: 'Classroom' },
+    // Advanced Diploma (3 tracks)
+    { id: 'ngdc-adipss-001', code: 'NGDC-ADIPSS-001', title: 'Advanced Diploma as Strategic & Specialist Data Center Design & Construction (Track A)', program: 'Data Center', level: 'Advanced Diploma', duration: '144 Days', format: 'Classroom' },
+    { id: 'ngdc-adipss-002', code: 'NGDC-ADIPSS-002', title: 'Advanced Diploma as Strategic & Specialist in Infrastructure, Operations & Resilience Leadership (Track B)', program: 'Data Center', level: 'Advanced Diploma', duration: '144 Days', format: 'Classroom' },
+    { id: 'ngdc-adipss-003', code: 'NGDC-ADIPSS-003', title: 'Advanced Diploma as Strategic & Specialist in Sustainability & AI Infrastructure (Track C)', program: 'Data Center', level: 'Advanced Diploma', duration: '144 Days', format: 'Classroom' },
+    // Executive Diploma
+    { id: 'ngdc-edip-001', code: 'NGDC-EDIP-001', title: 'Executive Advanced Diploma in Data Center Strategy & Infrastructure Leadership (combination of all 3 Tracks)', program: 'Data Center', level: 'Executive Diploma', duration: '48 Days', format: 'Classroom' },
+
+    // ===== CYBERSECURITY =====
+    // Foundation
+    { id: 'cysec-f5-001', code: 'CYSEC-F5-001', title: 'Cybersecurity Fundamentals for Modern Digital Infrastructure (Hands-on cyber attack simulations, tabletop exercises and Security assessment workshop)', program: 'Cybersecurity', level: 'Foundation', duration: '8 Days', format: 'Classroom' },
+    // Continuing Education (Online Modular)
+    { id: 'cysec-s1-001', code: 'CYSEC-S1-001', title: 'Cyberattack Awareness & Incident Response for Today\'s Digital Organisations', program: 'Cybersecurity', level: 'Continuing Education', duration: '1 Day', format: 'Online Modular' },
+    { id: 'cysec-s1-002', code: 'CYSEC-S1-002', title: 'Cybersecurity Fundamentals & Modern Threat Landscape', program: 'Cybersecurity', level: 'Continuing Education', duration: '1 Day', format: 'Online Modular' },
+    { id: 'cysec-s1-003', code: 'CYSEC-S1-003', title: 'Network Security Fundamentals for Cybersecurity', program: 'Cybersecurity', level: 'Continuing Education', duration: '1 Day', format: 'Online Modular' },
+    { id: 'cysec-s1-004', code: 'CYSEC-S1-004', title: 'Cyber Hygiene & Security Operations Basics', program: 'Cybersecurity', level: 'Continuing Education', duration: '1 Day', format: 'Online Modular' },
+    { id: 'cysec-s1-005', code: 'CYSEC-S1-005', title: 'Introduction to Ethical Hacking & Penetration Testing', program: 'Cybersecurity', level: 'Continuing Education', duration: '1 Day', format: 'Online Modular' },
+    { id: 'cysec-s1-006', code: 'CYSEC-S1-006', title: 'Introduction to Cyber Incident Response', program: 'Cybersecurity', level: 'Continuing Education', duration: '1 Day', format: 'Online Modular' },
+    { id: 'cysec-s3-001', code: 'CYSEC-S3-001', title: 'Cybersecurity Incident Response & Threat Defence', program: 'Cybersecurity', level: 'Continuing Education', duration: '3 Days', format: 'Online Modular' },
+    // Diploma
+    { id: 'cysec-dip-001', code: 'CYSEC-DIP-001', title: 'Diploma in Cybersecurity Operations & Digital Defence', program: 'Cybersecurity', level: 'Diploma', duration: '48 Days', format: 'Classroom' },
+    // Advanced Diploma (4 tracks)
+    { id: 'cysec-adipss-001', code: 'CYSEC-ADIPSS-001', title: 'Advanced Specialist Diploma – Ethical Hacking & VAPT (Aligned: CEH, OSCP)', program: 'Cybersecurity', level: 'Advanced Diploma', duration: '48 Days', format: 'Classroom' },
+    { id: 'cysec-adipss-002', code: 'CYSEC-ADIPSS-002', title: 'Advanced Specialist Diploma – Cybersecurity Governance & Risk (Aligned: CISSP, CISM)', program: 'Cybersecurity', level: 'Advanced Diploma', duration: '48 Days', format: 'Classroom' },
+    { id: 'cysec-adipss-003', code: 'CYSEC-ADIPSS-003', title: 'Advanced Specialist Diploma – Cloud & Hybrid Security (Aligned: CCSP)', program: 'Cybersecurity', level: 'Advanced Diploma', duration: '48 Days', format: 'Classroom' },
+    { id: 'cysec-adipss-004', code: 'CYSEC-ADIPSS-004', title: 'Advanced Specialist Diploma – Incident Response & Digital Forensics (Aligned: GCIH, GCFA)', program: 'Cybersecurity', level: 'Advanced Diploma', duration: '48 Days', format: 'Classroom' },
+    // Executive Diploma
+    { id: 'cysec-edip-001', code: 'CYSEC-EDIP-001', title: 'Executive Diploma in Strategic Cybersecurity & Digital Resilience Leadership – Industry & National Level', program: 'Cybersecurity', level: 'Executive Diploma', duration: '48 Days', format: 'Classroom' },
   ];
 
-  const insInstructor = db.prepare('INSERT INTO instructors (id, name, title, bio, image_url) VALUES (?, ?, ?, ?, ?)');
-  for (const i of instructors) {
-    insInstructor.run(i.id, i.name, i.title, i.bio, i.image_url);
-  }
+  const insCourse = db.prepare('INSERT INTO courses (id, code, title, program, level, duration, format) VALUES (?,?,?,?,?,?,?)');
 
-  // --- Courses ---
-  const coursesData = [
-    {
-      id: 'dc-101', code: 'DCP-100', title: 'Certified Data Center Professional', category: 'Data Center',
-      level: 'Intermediate', duration: '3 Days', price: 1800,
-      overview: 'This comprehensive course covers the key components of data center design and operations, ensuring high availability and efficiency.',
-      instructor_id: 'eng-jones',
-      audiences: ['Data Center Managers', 'Facility Engineers', 'IT Operations Managers', 'Network Architects'],
-      prerequisites: ['Basic understanding of IT infrastructure', 'No formal pre-qualifications required'],
-      objectives: [
-        'Understand Tier classifications (I, II, III, IV)',
-        'Manage cooling and power efficiency (PUE)',
-        'Implement physical security standards',
-        'Design for maintainability and fault tolerance',
-      ],
-      schedules: [
-        { id: 's1', start_date: '2026-03-10', end_date: '2026-03-12', location: 'London, UK', type: 'Classroom', status: 'Guaranteed' },
-        { id: 's2', start_date: '2026-04-05', end_date: '2026-04-07', location: 'Virtual (GMT)', type: 'Virtual', status: 'Open' },
-        { id: 's3', start_date: '2026-05-20', end_date: '2026-05-22', location: 'Singapore', type: 'Classroom', status: 'Limited' },
-      ],
-      curriculum: [
-        {
-          dayTitle: 'Day 1: Foundation & Infrastructure',
-          modules: [
-            { title: 'Data Center Standards', duration: '2 hours', topics: ['TIA-942', 'EN 50600', 'Uptime Institute Tiers'] },
-            { title: 'Physical Location & Building', duration: '2.5 hours', topics: ['Site Selection', 'Floor Loading', 'Seismic Considerations'] },
-            { title: 'Power Distribution', duration: '3 hours', topics: ['UPS Systems', 'Generators', 'Redundancy Levels (N, N+1, 2N)'] },
-          ],
-        },
-        {
-          dayTitle: 'Day 2: Cooling & Connectivity',
-          modules: [
-            { title: 'Cooling Management', duration: '3 hours', topics: ['Hot/Cold Aisle Containment', 'Psychrometric Charts', 'Liquid Cooling Trends'] },
-            { title: 'Structured Cabling', duration: '2 hours', topics: ['Fiber vs Copper', 'Cable Management', 'Pathways'] },
-            { title: 'Fire Protection', duration: '2 hours', topics: ['VESDA', 'Suppression Systems', 'Regulations'] },
-          ],
-        },
-        {
-          dayTitle: 'Day 3: Operations & Exam',
-          modules: [
-            { title: 'Physical Security', duration: '2 hours', topics: ['Access Control', 'Surveillance', 'Mantrap Design'] },
-            { title: 'DCIM & Monitoring', duration: '2 hours', topics: ['Environmental Monitoring', 'Asset Management', 'Capacity Planning'] },
-            { title: 'Final Examination', duration: '1.5 hours', topics: ['60-minute multiple choice exam', 'Certification ceremony'] },
-          ],
-        },
-      ],
-      reviews: [
-        { id: 'r1', author: 'Marcus K.', role: 'Operations Lead', date: '2 weeks ago', rating: 5, text: 'The instructor knowledge was incredible. We implemented the cooling strategies immediately upon my return and saved 15% on energy costs.' },
-        { id: 'r2', author: 'Sarah J.', role: 'Facility Manager', date: '1 month ago', rating: 4, text: 'Great content. The virtual platform worked surprisingly well for the group exercises.' },
-      ],
-      relatedCourseIds: ['bcm-200', 'cyb-300'],
-    },
-    {
-      id: 'bcm-200', code: 'BCM-200', title: 'Business Continuity Management Systems (ISO 22301)', category: 'Business Continuity',
-      level: 'Expert', duration: '5 Days', price: 2400,
-      overview: 'Master the implementation of a Business Continuity Management System (BCMS) compliant with ISO 22301 standards.',
-      instructor_id: 'lisa-wong',
-      audiences: ['Risk Officers', 'Compliance Managers', 'BCM Leads'],
-      prerequisites: ['Familiarity with ISO management systems', '2 years experience in risk or operations'],
-      objectives: [
-        'Conduct Business Impact Analysis (BIA)',
-        'Develop recovery strategies and plans',
-        'Lead internal audits and management reviews',
-        'Manage crisis communications',
-      ],
-      schedules: [
-        { id: 's4', start_date: '2026-03-15', end_date: '2026-03-19', location: 'Virtual (EST)', type: 'Virtual', status: 'Guaranteed' },
-        { id: 's5', start_date: '2026-06-01', end_date: '2026-06-05', location: 'Dubai, UAE', type: 'Classroom', status: 'Open' },
-      ],
-      curriculum: [
-        {
-          dayTitle: 'Day 1: Introduction to ISO 22301',
-          modules: [
-            { title: 'Context of the Organization', duration: '3 hours', topics: ['Stakeholder Analysis', 'Scope Definition'] },
-            { title: 'Leadership & Commitment', duration: '3 hours', topics: ['Management Buy-in', 'Policy Writing'] },
-          ],
-        },
-        {
-          dayTitle: 'Day 2: Planning & BIA',
-          modules: [
-            { title: 'Business Impact Analysis', duration: '4 hours', topics: ['RTO/RPO definition', 'Dependency Mapping'] },
-            { title: 'Risk Assessment', duration: '3 hours', topics: ['Threat Identification', 'Vulnerability Analysis'] },
-          ],
-        },
-      ],
-      reviews: [
-        { id: 'r3', author: 'David L.', role: 'Risk Manager', date: '3 weeks ago', rating: 5, text: 'Essential for anyone dealing with ISO audits. Lisa made the dry material very engaging.' },
-      ],
-      relatedCourseIds: ['dc-101', 'cyb-300'],
-    },
-    {
-      id: 'cyb-300', code: 'CYB-300', title: 'Critical Infrastructure Cybersecurity', category: 'Cybersecurity',
-      level: 'Expert', duration: '4 Days', price: 2100,
-      overview: 'Advanced training on protecting critical infrastructure assets from sophisticated cyber threats and state-sponsored attacks.',
-      instructor_id: 'dr-smith',
-      audiences: ['Security Architects', 'Network Engineers', 'SCADA Operators'],
-      prerequisites: ['Strong networking knowledge (TCP/IP)', 'Basic understanding of industrial control systems'],
-      objectives: [
-        'Analyze threat vectors in OT environments',
-        'Implement defense-in-depth strategies',
-        'Manage incident response for critical systems',
-        'Navigate regulatory compliance (NIS2, CIP)',
-      ],
-      schedules: [
-        { id: 's6', start_date: '2026-04-12', end_date: '2026-04-15', location: 'Virtual (CET)', type: 'Virtual', status: 'Limited' },
-        { id: 's7', start_date: '2026-07-10', end_date: '2026-07-13', location: 'New York, USA', type: 'Classroom', status: 'Sold Out' },
-      ],
-      curriculum: [
-        {
-          dayTitle: 'Day 1: The Threat Landscape',
-          modules: [
-            { title: 'IT vs OT Security', duration: '3 hours', topics: ['CIA Triad vs AIC Triad', 'Air Gaps'] },
-            { title: 'ICS Protocols', duration: '3 hours', topics: ['Modbus', 'DNP3', 'Vulnerability Assessment'] },
-          ],
-        },
-      ],
-      reviews: [
-        { id: 'r4', author: 'Elena R.', role: 'SCADA Engineer', date: '2 months ago', rating: 5, text: 'Finally a course that understands the difference between IT and OT security.' },
-      ],
-      relatedCourseIds: ['dc-101', 'bcm-200'],
-    },
-  ];
-
-  const insCourse = db.prepare('INSERT INTO courses (id, code, title, category, level, duration, price, overview, instructor_id) VALUES (?,?,?,?,?,?,?,?,?)');
-  const insAudience = db.prepare('INSERT INTO course_audiences (course_id, audience) VALUES (?,?)');
-  const insObjective = db.prepare('INSERT INTO course_objectives (course_id, objective, sort_order) VALUES (?,?,?)');
-  const insPrereq = db.prepare('INSERT INTO course_prerequisites (course_id, prerequisite) VALUES (?,?)');
-  const insSchedule = db.prepare('INSERT INTO schedules (id, course_id, start_date, end_date, location, type, status) VALUES (?,?,?,?,?,?,?)');
-  const insDay = db.prepare('INSERT INTO curriculum_days (course_id, day_title, sort_order) VALUES (?,?,?)');
-  const insModule = db.prepare('INSERT INTO curriculum_modules (day_id, title, duration, sort_order) VALUES (?,?,?,?)');
-  const insTopic = db.prepare('INSERT INTO module_topics (module_id, topic, sort_order) VALUES (?,?,?)');
-  const insReview = db.prepare('INSERT INTO reviews (id, course_id, author, role, date, rating, text) VALUES (?,?,?,?,?,?,?)');
-  const insRelated = db.prepare('INSERT INTO related_courses (course_id, related_course_id) VALUES (?,?)');
-
-  const seedCourses = db.transaction(() => {
-    for (const c of coursesData) {
-      insCourse.run(c.id, c.code, c.title, c.category, c.level, c.duration, c.price, c.overview, c.instructor_id);
-      c.audiences.forEach(a => insAudience.run(c.id, a));
-      c.objectives.forEach((o, i) => insObjective.run(c.id, o, i));
-      c.prerequisites.forEach(p => insPrereq.run(c.id, p));
-      c.schedules.forEach(s => insSchedule.run(s.id, c.id, s.start_date, s.end_date, s.location, s.type, s.status));
-
-      for (let di = 0; di < c.curriculum.length; di++) {
-        const day = c.curriculum[di];
-        const dayResult = insDay.run(c.id, day.dayTitle, di);
-        const dayId = dayResult.lastInsertRowid;
-        for (let mi = 0; mi < day.modules.length; mi++) {
-          const mod = day.modules[mi];
-          const modResult = insModule.run(dayId, mod.title, mod.duration, mi);
-          const modId = modResult.lastInsertRowid;
-          mod.topics.forEach((t, ti) => insTopic.run(modId, t, ti));
-        }
-      }
-
-      c.reviews.forEach(r => insReview.run(r.id, c.id, r.author, r.role, r.date, r.rating, r.text));
-    }
-
-    // Insert related courses AFTER all courses exist
-    for (const c of coursesData) {
-      c.relatedCourseIds.forEach(rid => insRelated.run(c.id, rid));
+  const seedAll = db.transaction(() => {
+    let order = 0;
+    for (const c of courses) {
+      insCourse.run(c.id, c.code, c.title, c.program, c.level, c.duration, c.format);
+      order++;
     }
   });
-  seedCourses();
+  seedAll();
 
   // --- Testimonials ---
   const insTestimonial = db.prepare('INSERT INTO testimonials (text, author, company) VALUES (?,?,?)');
@@ -210,11 +117,11 @@ export function seed() {
   insResource.run('Guide', 'SCADA Security Essentials', 'Oct 05, 2025', 'Cybersecurity', 'A definitive guide to securing operational technology environments against modern threats.', 'https://images.unsplash.com/photo-1551808525-51a943718d53?auto=format&fit=crop&q=80&w=800');
   insResource.run('Report', 'Global Data Center Market Trends 2026', 'Sep 12, 2025', 'Data Center', 'Market analysis focusing on the shift towards edge computing and sustainable infrastructure.', 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800');
 
-  // --- Alumni Logos ---
+  // --- Partner Logos ---
   const insLogo = db.prepare('INSERT INTO alumni_logos (name, url) VALUES (?,?)');
-  ['Google', 'Amazon', 'Microsoft', 'HSBC', 'Equinix', 'Siemens'].forEach(name => {
-    insLogo.run(name, `https://placehold.co/120x40/white/111111?text=${name}`);
+  ['Partner 1', 'Partner 2', 'Partner 3', 'Partner 4'].forEach(name => {
+    insLogo.run(name, `https://placehold.co/120x40/white/111111?text=${encodeURIComponent(name)}`);
   });
 
-  console.log('Database seeded successfully.');
+  console.log('Database seeded successfully with MCI Prospectus data.');
 }

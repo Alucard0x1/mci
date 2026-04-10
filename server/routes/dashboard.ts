@@ -17,7 +17,10 @@ router.get('/stats', (_req: AuthRequest, res: Response) => {
   const leadCount = (db.prepare('SELECT COUNT(*) as c FROM syllabus_leads').get() as any).c;
   const waitlistCount = (db.prepare('SELECT COUNT(*) as c FROM waitlist').get() as any).c;
 
-  res.json({ courseCount, scheduleCount, enquiryCount, leadCount, waitlistCount });
+  // Courses by program
+  const coursesByProgram = db.prepare('SELECT program, COUNT(*) as count FROM courses GROUP BY program').all();
+
+  res.json({ courseCount, scheduleCount, enquiryCount, leadCount, waitlistCount, coursesByProgram });
 });
 
 // GET /api/dashboard/enquiries

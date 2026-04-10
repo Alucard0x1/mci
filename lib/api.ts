@@ -46,4 +46,15 @@ export const api = {
   getDashboardEnquiries: () => request('/dashboard/enquiries'),
   getDashboardLeads: () => request('/dashboard/leads'),
   getDashboardWaitlist: () => request('/dashboard/waitlist'),
+
+  // Courses CRUD (admin, protected)
+  getAdminCourses: () => request('/courses/admin/all'),
+  createCourse: (data: any) =>
+    request('/courses/admin', { method: 'POST', body: JSON.stringify(data) }),
+  updateCourse: (id: string, data: any) =>
+    request(`/courses/admin/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  deleteCourse: (id: string) =>
+    request(`/courses/admin/${id}`, { method: 'DELETE' }),
+  togglePublishCourse: (id: string) =>
+    request(`/courses/admin/${id}/publish`, { method: 'PATCH' }),
 };

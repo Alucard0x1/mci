@@ -36,22 +36,27 @@ export function initDb() {
       id TEXT PRIMARY KEY,
       name TEXT NOT NULL,
       title TEXT NOT NULL,
-      bio TEXT NOT NULL,
+      bio TEXT NOT NULL DEFAULT '',
       image_url TEXT
     );
 
-    -- Courses
+    -- Courses (aligned with MCI Prospectus structure)
     CREATE TABLE IF NOT EXISTS courses (
       id TEXT PRIMARY KEY,
       code TEXT UNIQUE NOT NULL,
       title TEXT NOT NULL,
-      category TEXT NOT NULL,
+      program TEXT NOT NULL,
       level TEXT NOT NULL,
       duration TEXT NOT NULL,
-      price REAL NOT NULL,
-      overview TEXT NOT NULL,
-      instructor_id TEXT NOT NULL,
-      FOREIGN KEY (instructor_id) REFERENCES instructors(id)
+      format TEXT NOT NULL DEFAULT 'Classroom',
+      price REAL NOT NULL DEFAULT 0,
+      overview TEXT NOT NULL DEFAULT '',
+      instructor_id TEXT,
+      is_published INTEGER NOT NULL DEFAULT 1,
+      sort_order INTEGER NOT NULL DEFAULT 0,
+      created_at TEXT NOT NULL DEFAULT (datetime('now')),
+      updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+      FOREIGN KEY (instructor_id) REFERENCES instructors(id) ON DELETE SET NULL
     );
 
     -- Course audiences
@@ -86,8 +91,10 @@ export function initDb() {
       start_date TEXT NOT NULL,
       end_date TEXT NOT NULL,
       location TEXT NOT NULL,
-      type TEXT NOT NULL CHECK(type IN ('Virtual','Classroom')),
-      status TEXT NOT NULL CHECK(status IN ('Open','Guaranteed','Limited','Sold Out')),
+      type TEXT NOT NULL DEFAULT 'Classroom',
+      status TEXT NOT NULL DEFAULT 'Open',
+      capacity INTEGER DEFAULT 30,
+      enrolled INTEGER DEFAULT 0,
       FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE
     );
 
@@ -147,6 +154,7 @@ export function initDb() {
       email TEXT NOT NULL,
       type TEXT NOT NULL,
       message TEXT NOT NULL,
+      status TEXT NOT NULL DEFAULT 'new',
       created_at TEXT NOT NULL DEFAULT (datetime('now'))
     );
 
@@ -188,7 +196,7 @@ export function initDb() {
       company TEXT NOT NULL
     );
 
-    -- Alumni logos
+    -- Alumni / partner logos
     CREATE TABLE IF NOT EXISTS alumni_logos (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL,

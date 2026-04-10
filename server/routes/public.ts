@@ -38,7 +38,7 @@ router.get('/calendar', (req: Request, res: Response) => {
   const { category, type } = req.query;
 
   let sql = `
-    SELECT s.*, c.title as course_title, c.id as course_id, c.category
+    SELECT s.*, c.title as course_title, c.id as course_id, c.program
     FROM schedules s
     JOIN courses c ON s.course_id = c.id
     WHERE 1=1
@@ -46,7 +46,7 @@ router.get('/calendar', (req: Request, res: Response) => {
   const params: any[] = [];
 
   if (category && category !== 'All') {
-    sql += ' AND c.category = ?';
+    sql += ' AND c.program = ?';
     params.push(category);
   }
   if (type && type !== 'All') {
@@ -66,7 +66,7 @@ router.get('/calendar', (req: Request, res: Response) => {
     status: e.status,
     courseTitle: e.course_title,
     courseId: e.course_id,
-    category: e.category,
+    category: e.program,
   })));
 });
 
