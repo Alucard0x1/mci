@@ -1,6 +1,6 @@
 # MCI Training Platform
 
-Platform pelatihan profesional untuk Data Center, Business Continuity, dan Cybersecurity.
+Professional training platform for Data Center, Business Continuity, and Cybersecurity programs.
 
 ## Tech Stack
 
@@ -23,14 +23,14 @@ npm install
 
 ### 2. Environment variables
 
-File `.env` sudah tersedia di root project. Isinya:
+Create a `.env` file in the project root:
 
 ```
-JWT_SECRET=mci-training-jwt-secret-change-this-in-production
+JWT_SECRET=replace-with-a-secure-random-string
 PORT=3001
 ```
 
-Ganti `JWT_SECRET` dengan value yang lebih aman untuk production.
+Generate a secure secret with `openssl rand -hex 32`.
 
 ### 3. Start Backend (Express + SQLite)
 
@@ -38,21 +38,21 @@ Ganti `JWT_SECRET` dengan value yang lebih aman untuk production.
 npm run server
 ```
 
-Backend jalan di `http://localhost:3001`. Database SQLite otomatis dibuat dan di-seed saat pertama kali jalan (file: `data/mci.db`).
+Runs on `http://localhost:3001`. The SQLite database is automatically created and seeded on first run (`data/mci.db`).
 
 ### 4. Start Frontend (Vite + React)
 
-Di terminal terpisah:
+In a separate terminal:
 
 ```bash
 npm run dev
 ```
 
-Frontend jalan di `http://localhost:3000`.
+Runs on `http://localhost:3000`.
 
-## Akses Aplikasi
+## Access
 
-| Halaman | URL |
+| Page | URL |
 |---|---|
 | Homepage | `http://localhost:3000` |
 | Login | `http://localhost:3000/#/login` |
@@ -67,69 +67,73 @@ Frontend jalan di `http://localhost:3000`.
 
 ## API Endpoints
 
-### Public (tanpa auth)
+### Public (no auth required)
 
-| Method | Endpoint | Keterangan |
+| Method | Endpoint | Description |
 |---|---|---|
-| GET | `/api/courses` | Semua course |
-| GET | `/api/courses/:id` | Detail course |
+| GET | `/api/courses` | List all courses |
+| GET | `/api/courses/:id` | Course detail |
 | GET | `/api/calendar?category=&type=` | Training calendar |
 | GET | `/api/testimonials` | Testimonials |
 | GET | `/api/alumni-logos` | Alumni logos |
-| GET | `/api/resources?category=` | Resources/articles |
-| GET | `/api/instructors` | Semua instructor |
+| GET | `/api/resources?category=` | Resources & articles |
+| GET | `/api/instructors` | All instructors |
 | POST | `/api/enquiries` | Submit contact form |
-| POST | `/api/syllabus-download` | Download syllabus (lead capture) |
+| POST | `/api/syllabus-download` | Syllabus download (lead capture) |
 | POST | `/api/waitlist` | Join waitlist |
 | GET | `/api/health` | Health check |
 
 ### Auth
 
-| Method | Endpoint | Keterangan |
+| Method | Endpoint | Description |
 |---|---|---|
-| POST | `/api/auth/login` | Login, return JWT token |
-| GET | `/api/auth/me` | Get current user (Bearer token) |
+| POST | `/api/auth/login` | Login, returns JWT token |
+| GET | `/api/auth/me` | Get current user (requires Bearer token) |
 
-### Dashboard (perlu Bearer token)
+### Dashboard (requires Bearer token)
 
-| Method | Endpoint | Keterangan |
+| Method | Endpoint | Description |
 |---|---|---|
-| GET | `/api/dashboard/stats` | Summary stats |
-| GET | `/api/dashboard/enquiries` | Daftar enquiries |
-| GET | `/api/dashboard/leads` | Daftar syllabus leads |
-| GET | `/api/dashboard/waitlist` | Daftar waitlist |
+| GET | `/api/dashboard/stats` | Summary statistics |
+| GET | `/api/dashboard/enquiries` | List enquiries |
+| GET | `/api/dashboard/leads` | List syllabus download leads |
+| GET | `/api/dashboard/waitlist` | List waitlist entries |
 
 ## Project Structure
 
 ```
-├── server/                  # Backend Express.js
-│   ├── index.ts             # Entry point server
+├── server/                  # Express.js backend
+│   ├── index.ts             # Server entry point
 │   ├── db/
-│   │   ├── schema.ts        # Database schema & init
+│   │   ├── schema.ts        # Database schema & initialization
 │   │   └── seed.ts          # Seed data
 │   ├── middleware/
 │   │   └── auth.ts          # JWT middleware
 │   └── routes/
 │       ├── auth.ts          # Login & auth routes
-│       ├── courses.ts       # Course CRUD
+│       ├── courses.ts       # Course endpoints
 │       ├── dashboard.ts     # Protected dashboard routes
 │       └── public.ts        # Public API routes
 ├── lib/                     # Frontend utilities
 │   ├── api.ts               # API client helper
 │   └── AuthContext.tsx       # React auth context
 ├── components/              # Reusable UI components
-├── pages/                   # Route pages (termasuk Login & Dashboard)
+├── pages/                   # Route pages (including Login & Dashboard)
 ├── data/                    # SQLite database (auto-generated)
-├── constants.ts             # Static data (legacy, sekarang di DB)
+├── constants.ts             # Static data (legacy, now in DB)
 ├── types.ts                 # TypeScript interfaces
 └── App.tsx                  # Router & app shell
 ```
 
 ## Scripts
 
-| Command | Keterangan |
+| Command | Description |
 |---|---|
 | `npm run dev` | Start frontend (Vite, port 3000) |
 | `npm run server` | Start backend (Express, port 3001) |
-| `npm run build` | Build frontend untuk production |
+| `npm run build` | Build frontend for production |
 | `npm run preview` | Preview production build |
+
+## Deployment
+
+See `deploy-prompt.md` for full server deployment instructions (Nginx + PM2 + SSL).
