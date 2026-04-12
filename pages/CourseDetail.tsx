@@ -81,7 +81,7 @@ const CourseDetail = () => {
   }, []);
 
   if (!course) {
-    return <div className="p-20 text-center text-mci-navy font-bold text-xl">Course not found.</div>;
+    return <div className="p-20 text-center text-mci-text font-bold text-xl">Course not found.</div>;
   }
 
   // --- Handlers ---
@@ -126,7 +126,7 @@ const CourseDetail = () => {
                 <div className="flex items-center gap-6 mb-6">
                    <img src={modalInstructor.imageUrl} alt={modalInstructor.name} className="w-24 h-24 rounded-full object-cover border-4 border-mci-lightGrey" />
                    <div>
-                     <h3 className="text-2xl font-bold text-mci-navy">{modalInstructor.name}</h3>
+                     <h3 className="text-2xl font-bold text-mci-text">{modalInstructor.name}</h3>
                      <p className="text-mci-teal font-medium">{modalInstructor.title}</p>
                    </div>
                 </div>
@@ -151,14 +151,14 @@ const CourseDetail = () => {
       )}
 
       {showSyllabusModal && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-mci-navy/80 backdrop-blur-sm animate-in fade-in duration-200 print:hidden">
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-mci-maroon/80 backdrop-blur-sm animate-in fade-in duration-200 print:hidden">
            <div className="bg-white rounded-xl shadow-2xl max-w-md w-full relative p-8">
              <button onClick={() => {setShowSyllabusModal(false); setIsSyllabusSubmitted(false); setSyllabusEmail('');}} className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><X size={20} /></button>
              {!isSyllabusSubmitted ? (
                <>
                  <div className="text-center mb-6">
-                   <div className="w-12 h-12 bg-mci-lightGrey rounded-full flex items-center justify-center mx-auto mb-4 text-mci-navy"><Download size={24} /></div>
-                   <h3 className="text-xl font-bold text-mci-navy">Download Syllabus</h3>
+                   <div className="w-12 h-12 bg-mci-lightGrey rounded-full flex items-center justify-center mx-auto mb-4 text-mci-text"><Download size={24} /></div>
+                   <h3 className="text-xl font-bold text-mci-text">Download Syllabus</h3>
                    <p className="text-sm text-gray-600 mt-2">Enter your email to receive the full breakdown for <span className="font-semibold">{course.code}</span>.</p>
                  </div>
                  <form onSubmit={handleSyllabusSubmit} className="space-y-4">
@@ -166,13 +166,13 @@ const CourseDetail = () => {
                      <label className="block text-xs font-bold text-gray-500 uppercase mb-1">Business Email</label>
                      <input type="email" required placeholder="you@company.com" value={syllabusEmail} onChange={(e) => setSyllabusEmail(e.target.value)} className="w-full border border-gray-300 rounded p-3 focus:border-mci-teal focus:ring-1 focus:ring-mci-teal outline-none" />
                    </div>
-                   <button type="submit" className="w-full bg-mci-teal text-white font-bold py-3 rounded hover:bg-mci-navy transition-colors">Send Syllabus</button>
+                   <button type="submit" className="w-full bg-mci-teal text-white font-bold py-3 rounded hover:bg-mci-maroon transition-colors">Send Syllabus</button>
                  </form>
                </>
              ) : (
                <div className="text-center py-8">
                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 text-green-600"><CheckCircle size={32} /></div>
-                 <h3 className="text-xl font-bold text-mci-navy mb-2">Sent!</h3>
+                 <h3 className="text-xl font-bold text-mci-text mb-2">Sent!</h3>
                  <p className="text-gray-600 text-sm">Check your inbox at <strong>{syllabusEmail}</strong>.</p>
                  <button onClick={() => {setShowSyllabusModal(false); setIsSyllabusSubmitted(false); setSyllabusEmail('');}} className="mt-6 text-mci-teal font-bold text-sm hover:underline">Close</button>
                </div>
@@ -182,14 +182,14 @@ const CourseDetail = () => {
       )}
 
       {showWaitlistModal && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-mci-navy/80 backdrop-blur-sm animate-in fade-in duration-200 print:hidden">
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-mci-maroon/80 backdrop-blur-sm animate-in fade-in duration-200 print:hidden">
            <div className="bg-white rounded-xl shadow-2xl max-w-md w-full relative p-8">
              <button onClick={() => {setShowWaitlistModal(false); setIsWaitlistSubmitted(false); setWaitlistEmail('');}} className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><X size={20} /></button>
              {!isWaitlistSubmitted ? (
                <>
                  <div className="text-center mb-6">
                    <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4 text-orange-600"><Bell size={24} /></div>
-                   <h3 className="text-xl font-bold text-mci-navy">Join Waitlist</h3>
+                   <h3 className="text-xl font-bold text-mci-text">Join Waitlist</h3>
                    <p className="text-sm text-gray-600 mt-2">{waitlistSession ? <>Get notified if a seat opens up for <strong>{waitlistSession.date}</strong>.</> : <>Get notified when new dates are announced.</>}</p>
                  </div>
                  <form onSubmit={handleWaitlistSubmit} className="space-y-4">
@@ -197,13 +197,13 @@ const CourseDetail = () => {
                      <label className="block text-xs font-bold text-gray-500 uppercase mb-1">Email Address</label>
                      <input type="email" required placeholder="you@company.com" value={waitlistEmail} onChange={(e) => setWaitlistEmail(e.target.value)} className="w-full border border-gray-300 rounded p-3 focus:border-mci-teal focus:ring-1 focus:ring-mci-teal outline-none" />
                    </div>
-                   <button type="submit" className="w-full bg-mci-navy text-white font-bold py-3 rounded hover:bg-mci-teal transition-colors shadow-lg active:scale-[0.98]">Alert Me</button>
+                   <button type="submit" className="w-full bg-mci-maroon text-white font-bold py-3 rounded hover:bg-mci-teal transition-colors shadow-lg active:scale-[0.98]">Alert Me</button>
                  </form>
                </>
              ) : (
                <div className="text-center py-8">
                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 text-green-600"><CheckCircle size={32} /></div>
-                 <h3 className="text-xl font-bold text-mci-navy mb-2">You're on the list!</h3>
+                 <h3 className="text-xl font-bold text-mci-text mb-2">You're on the list!</h3>
                  <button onClick={() => {setShowWaitlistModal(false); setIsWaitlistSubmitted(false); setWaitlistEmail('');}} className="mt-6 text-mci-teal font-bold text-sm hover:underline">Close</button>
                </div>
              )}
@@ -244,7 +244,7 @@ const CourseDetail = () => {
                 </span>
               </div>
               
-              <h1 className="text-3xl md:text-5xl font-bold text-mci-navy mb-6 leading-tight">{course.title}</h1>
+              <h1 className="text-3xl md:text-5xl font-bold text-mci-text mb-6 leading-tight">{course.title}</h1>
               <p className="text-lg text-gray-600 leading-relaxed mb-8">{course.overview}</p>
               
               {/* Quick Stats Grid */}
@@ -252,22 +252,22 @@ const CourseDetail = () => {
                 <div className="bg-mci-lightGrey rounded-xl p-4">
                     <Clock size={20} className="text-mci-teal mb-2" />
                     <div className="text-xs text-gray-500 uppercase font-bold mb-1">Duration</div>
-                    <div className="font-bold text-mci-navy">{course.duration}</div>
+                    <div className="font-bold text-mci-text">{course.duration}</div>
                 </div>
                 <div className="bg-mci-lightGrey rounded-xl p-4">
                     <Award size={20} className="text-mci-teal mb-2" />
                     <div className="text-xs text-gray-500 uppercase font-bold mb-1">Level</div>
-                    <div className="font-bold text-mci-navy">{course.level}</div>
+                    <div className="font-bold text-mci-text">{course.level}</div>
                 </div>
                 <div className="bg-mci-lightGrey rounded-xl p-4">
                     <MonitorPlay size={20} className="text-mci-teal mb-2" />
                     <div className="text-xs text-gray-500 uppercase font-bold mb-1">Delivery</div>
-                    <div className="font-bold text-mci-navy">Virtual / Classroom</div>
+                    <div className="font-bold text-mci-text">Virtual / Classroom</div>
                 </div>
                 <div className="bg-mci-lightGrey rounded-xl p-4">
                     <Star size={20} className="text-mci-amber fill-mci-amber mb-2" />
                     <div className="text-xs text-gray-500 uppercase font-bold mb-1">Rating</div>
-                    <div className="font-bold text-mci-navy">{course.reviewStats?.average} <span className="font-normal text-gray-400 text-xs">({course.reviewStats?.total})</span></div>
+                    <div className="font-bold text-mci-text">{course.reviewStats?.average} <span className="font-normal text-gray-400 text-xs">({course.reviewStats?.total})</span></div>
                 </div>
               </div>
             </div>
@@ -281,8 +281,8 @@ const CourseDetail = () => {
                     onClick={() => scrollToSection(section.toLowerCase())}
                     className={`py-4 font-bold text-sm whitespace-nowrap border-b-2 transition-colors ${
                       activeSection === section.toLowerCase() 
-                        ? 'border-mci-teal text-mci-navy' 
-                        : 'border-transparent text-gray-500 hover:text-mci-navy'
+                        ? 'border-mci-teal text-mci-text' 
+                        : 'border-transparent text-gray-500 hover:text-mci-text'
                     }`}
                   >
                     {section}
@@ -296,11 +296,11 @@ const CourseDetail = () => {
               
               {/* Overview */}
               <section id="overview" className="scroll-mt-40">
-                <h2 className="text-2xl font-bold text-mci-navy mb-6">Program Overview</h2>
+                <h2 className="text-2xl font-bold text-mci-text mb-6">Program Overview</h2>
                 <div className="prose text-gray-600 max-w-none">
                     <p className="mb-6">This intensive training program is designed to bridge the gap between theoretical knowledge and practical application. Participants will engage in case studies, group exercises, and real-world simulations.</p>
                     
-                    <h3 className="text-lg font-bold text-mci-navy mb-4">Key Learning Outcomes</h3>
+                    <h3 className="text-lg font-bold text-mci-text mb-4">Key Learning Outcomes</h3>
                     <div className="grid md:grid-cols-2 gap-4 mb-8">
                       {course.objectives.map((obj, i) => (
                         <div key={i} className="flex items-start gap-3">
@@ -311,14 +311,14 @@ const CourseDetail = () => {
                     </div>
 
                     <div className="bg-blue-50/50 border border-blue-100 rounded-lg p-6">
-                       <h3 className="text-sm font-bold text-mci-navy uppercase tracking-widest mb-4">Who Should Attend</h3>
+                       <h3 className="text-sm font-bold text-mci-text uppercase tracking-widest mb-4">Who Should Attend</h3>
                        <div className="flex flex-wrap gap-2 mb-6">
                          {course.audience.map((aud, i) => (
                            <span key={i} className="px-3 py-1 bg-white border border-blue-100 rounded text-xs font-medium text-gray-700">{aud}</span>
                          ))}
                        </div>
                        
-                       <h3 className="text-sm font-bold text-mci-navy uppercase tracking-widest mb-2">Prerequisites</h3>
+                       <h3 className="text-sm font-bold text-mci-text uppercase tracking-widest mb-2">Prerequisites</h3>
                        <ul className="space-y-2 text-xs text-gray-600">
                          {course.prerequisites?.map((pre, i) => (
                            <li key={i} className="flex items-start gap-2">
@@ -333,7 +333,7 @@ const CourseDetail = () => {
               {/* Curriculum */}
               <section id="curriculum" className="scroll-mt-40">
                  <div className="flex justify-between items-end mb-6">
-                  <h2 className="text-2xl font-bold text-mci-navy">Course Curriculum</h2>
+                  <h2 className="text-2xl font-bold text-mci-text">Course Curriculum</h2>
                   <button onClick={() => setShowSyllabusModal(true)} className="text-mci-teal font-bold text-sm flex items-center gap-2 hover:underline">
                     <Download size={16} /> Download PDF
                   </button>
@@ -345,7 +345,7 @@ const CourseDetail = () => {
                         onClick={() => toggleCurriculumDay(idx)}
                         className="w-full flex items-center justify-between p-5 text-left bg-gray-50 hover:bg-gray-100 transition-colors"
                       >
-                        <span className="font-bold text-mci-navy">{day.dayTitle}</span>
+                        <span className="font-bold text-mci-text">{day.dayTitle}</span>
                         {openCurriculumDay === idx ? <ChevronUp size={20} className="text-gray-400" /> : <ChevronDown size={20} className="text-gray-400" />}
                       </button>
                       {openCurriculumDay === idx && (
@@ -374,7 +374,7 @@ const CourseDetail = () => {
 
               {/* Instructor */}
               <section id="instructor" className="scroll-mt-40">
-                 <h2 className="text-2xl font-bold text-mci-navy mb-6">Meet Your Instructor</h2>
+                 <h2 className="text-2xl font-bold text-mci-text mb-6">Meet Your Instructor</h2>
                  <div className="bg-white border border-gray-200 rounded-lg p-8 flex flex-col sm:flex-row gap-8 items-start hover:shadow-md transition-shadow cursor-pointer" onClick={() => setModalInstructor(course.instructor)}>
                     <div className="flex-shrink-0">
                       <img src={course.instructor.imageUrl} alt={course.instructor.name} className="w-24 h-24 rounded-full object-cover shadow-sm border-4 border-gray-50" />
@@ -382,12 +382,12 @@ const CourseDetail = () => {
                     <div className="flex-1">
                       <div className="flex justify-between items-start">
                          <div>
-                           <h3 className="text-xl font-bold text-mci-navy">{course.instructor.name}</h3>
+                           <h3 className="text-xl font-bold text-mci-text">{course.instructor.name}</h3>
                            <p className="text-mci-teal font-medium mb-4">{course.instructor.title}</p>
                          </div>
                       </div>
                       <p className="text-gray-600 text-sm leading-relaxed line-clamp-3 mb-4">{course.instructor.bio}</p>
-                      <button className="text-mci-navy text-sm font-bold flex items-center gap-1 hover:gap-2 transition-all">
+                      <button className="text-mci-text text-sm font-bold flex items-center gap-1 hover:gap-2 transition-all">
                         View Full Profile <ArrowRight size={14} />
                       </button>
                     </div>
@@ -396,10 +396,10 @@ const CourseDetail = () => {
 
               {/* Reviews */}
               <section id="reviews" className="scroll-mt-40">
-                 <h2 className="text-2xl font-bold text-mci-navy mb-6">Student Reviews</h2>
+                 <h2 className="text-2xl font-bold text-mci-text mb-6">Student Reviews</h2>
                  <div className="bg-gray-50 rounded-lg p-6 flex flex-col md:flex-row gap-8 items-center mb-8">
                     <div className="text-center md:text-left min-w-[120px]">
-                      <div className="text-5xl font-bold text-mci-navy mb-1">{course.reviewStats?.average}</div>
+                      <div className="text-5xl font-bold text-mci-text mb-1">{course.reviewStats?.average}</div>
                       <div className="flex justify-center md:justify-start gap-0.5 mb-1">
                         {[1,2,3,4,5].map(star => <Star key={star} size={14} className={`${star <= Math.round(course.reviewStats?.average || 0) ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}`} />)}
                       </div>
@@ -426,9 +426,9 @@ const CourseDetail = () => {
                     {course.reviews?.map(review => (
                       <div key={review.id} className="border border-gray-100 rounded-lg p-6 hover:shadow-sm transition-shadow">
                         <div className="flex items-center gap-3 mb-3">
-                           <div className="w-8 h-8 rounded-full bg-mci-navy/10 flex items-center justify-center text-xs font-bold text-mci-navy">{review.author.charAt(0)}</div>
+                           <div className="w-8 h-8 rounded-full bg-mci-maroon/10 flex items-center justify-center text-xs font-bold text-mci-text">{review.author.charAt(0)}</div>
                            <div>
-                             <div className="text-sm font-bold text-mci-navy">{review.author}</div>
+                             <div className="text-sm font-bold text-mci-text">{review.author}</div>
                              <div className="text-xs text-gray-400">{review.role}</div>
                            </div>
                            <div className="ml-auto flex gap-0.5">
@@ -443,7 +443,7 @@ const CourseDetail = () => {
 
               {/* Schedules */}
               <section id="schedules" className="scroll-mt-40">
-                  <h2 className="text-2xl font-bold text-mci-navy mb-6">Upcoming Dates</h2>
+                  <h2 className="text-2xl font-bold text-mci-text mb-6">Upcoming Dates</h2>
                   <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
                    <div className="grid grid-cols-4 bg-gray-50 p-4 text-xs font-bold text-gray-500 uppercase tracking-wider border-b border-gray-200">
                       <div>Date</div>
@@ -457,7 +457,7 @@ const CourseDetail = () => {
                          return (
                            <div key={schedule.id} className={`grid grid-cols-4 p-4 items-center transition-colors ${isSelected ? 'bg-blue-50' : 'hover:bg-gray-50'}`}>
                               <div>
-                                 <div className="font-bold text-mci-navy">{new Date(schedule.startDate).toLocaleDateString(undefined, {month: 'short', day: 'numeric'})}</div>
+                                 <div className="font-bold text-mci-text">{new Date(schedule.startDate).toLocaleDateString(undefined, {month: 'short', day: 'numeric'})}</div>
                                  <div className="text-xs text-gray-500">{new Date(schedule.startDate).getFullYear()}</div>
                               </div>
                               <div className="hidden sm:block text-sm">
@@ -472,14 +472,14 @@ const CourseDetail = () => {
                               </div>
                               <div className="text-right">
                                  {schedule.status === 'Sold Out' ? (
-                                    <button onClick={() => openWaitlist({date: new Date(schedule.startDate).toLocaleDateString(), location: schedule.location})} className="text-mci-navy hover:text-mci-teal text-xs font-bold underline">Waitlist</button>
+                                    <button onClick={() => openWaitlist({date: new Date(schedule.startDate).toLocaleDateString(), location: schedule.location})} className="text-mci-text hover:text-mci-teal text-xs font-bold underline">Waitlist</button>
                                  ) : (
                                     <button 
                                       onClick={() => handleSelectSchedule(schedule)}
                                       className={`px-3 py-1.5 md:px-4 md:py-2 rounded text-xs font-bold transition-all ${
                                         isSelected 
                                           ? 'bg-mci-teal text-white shadow-sm' 
-                                          : 'bg-white border border-mci-navy text-mci-navy hover:bg-mci-navy hover:text-white'
+                                          : 'bg-white border border-mci-maroon text-mci-text hover:bg-mci-maroon hover:text-white'
                                       }`}
                                     >
                                       {isSelected ? 'Selected' : 'Select'}
@@ -515,7 +515,7 @@ const CourseDetail = () => {
 
                    <div className="p-6">
                       <div className="flex items-baseline gap-2 mb-2">
-                         <span className="text-4xl font-bold text-mci-navy">${course.price}</span>
+                         <span className="text-4xl font-bold text-mci-text">${course.price}</span>
                          <span className="text-gray-400 line-through text-lg">${course.price + 500}</span>
                       </div>
                       <div className="inline-block bg-green-50 text-green-700 text-xs font-bold px-2 py-1 rounded border border-green-100 mb-6">
@@ -549,7 +549,7 @@ const CourseDetail = () => {
                           {selectedSchedule ? 'Proceed to Checkout' : 'View Schedule & Enroll'}
                         </button>
                         
-                        <button className="w-full py-3.5 rounded-lg font-bold text-mci-navy border-2 border-mci-navy hover:bg-mci-navy hover:text-white transition-colors flex items-center justify-center gap-2">
+                        <button className="w-full py-3.5 rounded-lg font-bold text-mci-text border-2 border-mci-maroon hover:bg-mci-maroon hover:text-white transition-colors flex items-center justify-center gap-2">
                           <Building2 size={18} /> Request Corporate Quote
                         </button>
                       </div>
@@ -575,7 +575,7 @@ const CourseDetail = () => {
                    </div>
                    
                    <div className="bg-gray-50 p-4 text-center border-t border-gray-100">
-                      <button onClick={() => setShowSyllabusModal(true)} className="text-mci-navy font-bold text-sm hover:text-mci-teal flex items-center justify-center gap-2 transition-colors">
+                      <button onClick={() => setShowSyllabusModal(true)} className="text-mci-text font-bold text-sm hover:text-mci-teal flex items-center justify-center gap-2 transition-colors">
                         <Download size={16} /> Download Full Syllabus (PDF)
                       </button>
                    </div>
@@ -583,7 +583,7 @@ const CourseDetail = () => {
 
                 {/* Need Help Box */}
                 <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-                   <h4 className="font-bold text-mci-navy mb-2">Have questions?</h4>
+                   <h4 className="font-bold text-mci-text mb-2">Have questions?</h4>
                    <p className="text-sm text-gray-600 mb-4">Our training advisors are available to help you find the right certification path.</p>
                    <Link to="/contact" className="text-mci-teal font-bold text-sm flex items-center gap-2 hover:underline">
                       Contact Advisor <ArrowRight size={14} />

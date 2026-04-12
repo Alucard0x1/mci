@@ -30,7 +30,7 @@ const SearchOverlay = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-mci-navy/90 backdrop-blur-sm flex items-start justify-center pt-32 animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 bg-mci-maroon/90 backdrop-blur-sm flex items-start justify-center pt-32 animate-in fade-in duration-200">
       <button onClick={onClose} className="absolute top-8 right-8 text-white/70 hover:text-white">
         <X size={32} />
       </button>
@@ -40,7 +40,7 @@ const SearchOverlay = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
           <input
             ref={inputRef}
             type="text"
-            className="w-full bg-white text-mci-navy text-xl font-medium py-6 pl-14 pr-6 rounded-lg shadow-2xl focus:outline-none focus:ring-4 focus:ring-mci-teal/50"
+            className="w-full bg-white text-mci-text text-xl font-medium py-6 pl-14 pr-6 rounded-lg shadow-2xl focus:outline-none focus:ring-4 focus:ring-mci-teal/50"
             placeholder="Search for courses, topics, or instructors..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -119,7 +119,7 @@ const Navbar = () => {
         <TopBanner />
         <nav 
           className={`w-full transition-all duration-300 border-b ${
-            isScrolled ? 'bg-white py-2 shadow-md border-gray-200' : 'bg-mci-navy py-4 border-transparent'
+            isScrolled ? 'bg-white py-2 shadow-md border-gray-200' : 'bg-white py-4 border-transparent'
           }`}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -128,7 +128,7 @@ const Navbar = () => {
               <div className="flex-shrink-0 flex items-center">
                 <Link to="/" className="flex items-center group">
                   <img 
-                    src={isScrolled ? '/mcired.png' : '/mciwhite.png'} 
+                    src="/mcired.png"
                     alt="MCI Training Institute" 
                     className="h-10 w-auto transition-all duration-300"
                   />
@@ -143,7 +143,7 @@ const Navbar = () => {
                   onMouseLeave={handleMenuLeave}
                 >
                   <button 
-                    className={`${isScrolled ? 'text-mci-text' : 'text-white'} hover:text-mci-teal font-medium flex items-center gap-1 py-2 ${isProgramMenuOpen ? 'text-mci-teal' : ''}`}
+                    className={`text-mci-text hover:text-mci-teal font-medium flex items-center gap-1 py-2 ${isProgramMenuOpen ? 'text-mci-teal' : ''}`}
                   >
                     Programs <ChevronDown size={16} className={`transition-transform duration-300 ${isProgramMenuOpen ? 'rotate-180' : ''}`} />
                   </button>
@@ -158,10 +158,10 @@ const Navbar = () => {
                       {/* Column 1: Data Center */}
                       <div className="space-y-4 group/item">
                         <Link to="/programs/data-center" className="flex items-center gap-3 mb-2">
-                           <div className="p-2 bg-blue-50 text-mci-navy rounded-lg group-hover/item:bg-mci-navy group-hover/item:text-white transition-colors">
+                           <div className="p-2 bg-blue-50 text-mci-text rounded-lg group-hover/item:bg-mci-maroon group-hover/item:text-white transition-colors">
                              <Server size={24} />
                            </div>
-                           <h3 className="font-bold text-lg text-mci-navy group-hover/item:text-mci-teal transition-colors">Data Center</h3>
+                           <h3 className="font-bold text-lg text-mci-text group-hover/item:text-mci-teal transition-colors">Data Center</h3>
                         </Link>
                         <p className="text-sm text-gray-500 leading-relaxed mb-4">
                           Design, operations, and efficiency standards (TIA-942, EN 50600) for mission-critical facilities.
@@ -176,10 +176,10 @@ const Navbar = () => {
                       {/* Column 2: Business Continuity */}
                       <div className="space-y-4 group/item">
                         <Link to="/programs/business-continuity" className="flex items-center gap-3 mb-2">
-                           <div className="p-2 bg-blue-50 text-mci-navy rounded-lg group-hover/item:bg-mci-navy group-hover/item:text-white transition-colors">
+                           <div className="p-2 bg-blue-50 text-mci-text rounded-lg group-hover/item:bg-mci-maroon group-hover/item:text-white transition-colors">
                              <Activity size={24} />
                            </div>
-                           <h3 className="font-bold text-lg text-mci-navy group-hover/item:text-mci-teal transition-colors">Business Continuity</h3>
+                           <h3 className="font-bold text-lg text-mci-text group-hover/item:text-mci-teal transition-colors">Business Continuity</h3>
                         </Link>
                         <p className="text-sm text-gray-500 leading-relaxed mb-4">
                           Resilience planning and ISO 22301 implementation for organizational stability.
@@ -194,10 +194,10 @@ const Navbar = () => {
                       {/* Column 3: Cybersecurity */}
                       <div className="space-y-4 group/item">
                         <Link to="/programs/cybersecurity" className="flex items-center gap-3 mb-2">
-                           <div className="p-2 bg-blue-50 text-mci-navy rounded-lg group-hover/item:bg-mci-navy group-hover/item:text-white transition-colors">
+                           <div className="p-2 bg-blue-50 text-mci-text rounded-lg group-hover/item:bg-mci-maroon group-hover/item:text-white transition-colors">
                              <Shield size={24} />
                            </div>
-                           <h3 className="font-bold text-lg text-mci-navy group-hover/item:text-mci-teal transition-colors">Cybersecurity</h3>
+                           <h3 className="font-bold text-lg text-mci-text group-hover/item:text-mci-teal transition-colors">Cybersecurity</h3>
                         </Link>
                         <p className="text-sm text-gray-500 leading-relaxed mb-4">
                            Critical infrastructure protection, SCADA security, and operational risk governance.
@@ -213,34 +213,34 @@ const Navbar = () => {
                     {/* Mega Menu Footer */}
                     <div className="bg-gray-50 px-8 py-4 flex justify-between items-center border-t border-gray-100">
                       <div className="flex gap-6">
-                        <Link to="/calendar" className="text-sm font-bold text-mci-navy flex items-center gap-2 hover:text-mci-teal">
+                        <Link to="/calendar" className="text-sm font-bold text-mci-text flex items-center gap-2 hover:text-mci-teal">
                           <FileText size={16} /> Training Calendar
                         </Link>
-                        <Link to="/corporate" className="text-sm font-bold text-mci-navy flex items-center gap-2 hover:text-mci-teal">
+                        <Link to="/corporate" className="text-sm font-bold text-mci-text flex items-center gap-2 hover:text-mci-teal">
                           <Users size={16} /> Team Training
                         </Link>
                       </div>
-                      <Link to="/resources" className="text-xs font-bold text-gray-500 uppercase tracking-wide flex items-center gap-2 hover:text-mci-navy transition-colors">
+                      <Link to="/resources" className="text-xs font-bold text-gray-500 uppercase tracking-wide flex items-center gap-2 hover:text-mci-text transition-colors">
                          <Download size={14} /> Download 2026 Course Catalog
                       </Link>
                     </div>
                   </div>
                 </div>
 
-                <Link to="/corporate" className={`${isScrolled ? 'text-mci-text' : 'text-white'} hover:text-mci-teal font-medium transition-colors`}>Corporate</Link>
-                <Link to="/about" className={`${isScrolled ? 'text-mci-text' : 'text-white'} hover:text-mci-teal font-medium transition-colors`}>About Us</Link>
-                <Link to="/resources" className={`${isScrolled ? 'text-mci-text' : 'text-white'} hover:text-mci-teal font-medium transition-colors`}>Resources</Link>
+                <Link to="/corporate" className="text-mci-text hover:text-mci-teal font-medium transition-colors">Corporate</Link>
+                <Link to="/about" className="text-mci-text hover:text-mci-teal font-medium transition-colors">About Us</Link>
+                <Link to="/resources" className="text-mci-text hover:text-mci-teal font-medium transition-colors">Resources</Link>
               </div>
 
               {/* Right Utilities */}
               <div className="hidden md:flex items-center space-x-6">
                 <button 
                   onClick={() => setIsSearchOpen(true)}
-                  className={`${isScrolled ? 'text-gray-500' : 'text-gray-300'} hover:text-mci-teal transition-colors`}
+                  className="text-gray-500 hover:text-mci-teal transition-colors"
                 >
                   <Search size={20} />
                 </button>
-                <Link to="/contact" className={`${isScrolled ? 'text-mci-navy' : 'text-white'} font-medium hover:underline decoration-mci-teal underline-offset-4`}>
+                <Link to="/contact" className="text-mci-text font-medium hover:underline decoration-mci-teal underline-offset-4">
                   Contact
                 </Link>
                 <Link 
@@ -255,7 +255,7 @@ const Navbar = () => {
               <div className="md:hidden flex items-center">
                 <button 
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                  className="text-mci-navy p-2"
+                  className="text-mci-text p-2"
                 >
                   {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>
@@ -272,41 +272,41 @@ const Navbar = () => {
                 <span className="text-gray-400 text-xs uppercase tracking-widest font-bold">Training Programs</span>
                 
                 <Link to="/programs/data-center" className="flex items-center gap-4 p-2 rounded-lg hover:bg-gray-50">
-                  <div className="p-2 bg-blue-50 text-mci-navy rounded">
+                  <div className="p-2 bg-blue-50 text-mci-text rounded">
                     <Server size={20} />
                   </div>
-                  <span className="text-mci-navy font-bold">Data Center</span>
+                  <span className="text-mci-text font-bold">Data Center</span>
                 </Link>
 
                 <Link to="/programs/business-continuity" className="flex items-center gap-4 p-2 rounded-lg hover:bg-gray-50">
-                  <div className="p-2 bg-blue-50 text-mci-navy rounded">
+                  <div className="p-2 bg-blue-50 text-mci-text rounded">
                     <Activity size={20} />
                   </div>
-                  <span className="text-mci-navy font-bold">Business Continuity</span>
+                  <span className="text-mci-text font-bold">Business Continuity</span>
                 </Link>
 
                 <Link to="/programs/cybersecurity" className="flex items-center gap-4 p-2 rounded-lg hover:bg-gray-50">
-                  <div className="p-2 bg-blue-50 text-mci-navy rounded">
+                  <div className="p-2 bg-blue-50 text-mci-text rounded">
                     <Shield size={20} />
                   </div>
-                  <span className="text-mci-navy font-bold">Cybersecurity</span>
+                  <span className="text-mci-text font-bold">Cybersecurity</span>
                 </Link>
               </div>
 
               <div className="space-y-6 flex flex-col">
-                <Link to="/corporate" className="text-mci-navy font-medium flex items-center gap-3">
+                <Link to="/corporate" className="text-mci-text font-medium flex items-center gap-3">
                    <Users size={20} className="text-gray-400" /> Corporate Services
                 </Link>
-                <Link to="/about" className="text-mci-navy font-medium flex items-center gap-3">
+                <Link to="/about" className="text-mci-text font-medium flex items-center gap-3">
                    <MapPin size={20} className="text-gray-400" /> About Us
                 </Link>
-                <Link to="/resources" className="text-mci-navy font-medium flex items-center gap-3">
+                <Link to="/resources" className="text-mci-text font-medium flex items-center gap-3">
                    <FileText size={20} className="text-gray-400" /> Resources
                 </Link>
-                <Link to="/calendar" className="text-mci-navy font-medium flex items-center gap-3">
+                <Link to="/calendar" className="text-mci-text font-medium flex items-center gap-3">
                    <Search size={20} className="text-gray-400" /> Training Calendar
                 </Link>
-                <Link to="/contact" className="text-mci-navy font-medium flex items-center gap-3">
+                <Link to="/contact" className="text-mci-text font-medium flex items-center gap-3">
                    <Mail size={20} className="text-gray-400" /> Contact
                 </Link>
               </div>
@@ -327,7 +327,7 @@ const Navbar = () => {
 
 const Footer = () => {
   return (
-    <footer className="bg-mci-navy text-white pt-16 pb-8 print:hidden">
+    <footer className="bg-mci-maroon text-white pt-16 pb-8 print:hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           {/* Brand */}

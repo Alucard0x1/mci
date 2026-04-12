@@ -27,7 +27,7 @@ const Calendar = () => {
     <div className="bg-white min-h-screen">
       <div className="bg-mci-lightGrey py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-mci-navy mb-4">Training Calendar</h1>
+          <h1 className="text-3xl font-bold text-mci-text mb-4">Training Calendar</h1>
           <p className="text-gray-600">View upcoming sessions across all disciplines.</p>
         </div>
       </div>
@@ -86,7 +86,7 @@ const Calendar = () => {
                   <div className="col-span-2 flex md:block items-center gap-2">
                     <span className="md:hidden text-gray-400 text-xs uppercase font-bold w-20">Date:</span>
                     <div>
-                      <span className="block font-bold text-mci-navy">{new Date(event.startDate).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}</span>
+                      <span className="block font-bold text-mci-text">{new Date(event.startDate).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}</span>
                       <span className="text-xs text-gray-500">{new Date(event.startDate).getFullYear()}</span>
                     </div>
                   </div>
@@ -96,7 +96,7 @@ const Calendar = () => {
                      <span className="inline-block px-2 py-0.5 bg-gray-100 text-gray-600 text-[10px] uppercase font-bold rounded mb-1">
                        {event.category}
                      </span>
-                     <Link to={`/courses/${event.courseId}`} className="block font-bold text-mci-navy group-hover:text-mci-teal transition-colors">
+                     <Link to={`/courses/${event.courseId}`} className="block font-bold text-mci-text group-hover:text-mci-teal transition-colors">
                        {event.courseTitle}
                      </Link>
                   </div>
@@ -131,7 +131,7 @@ const Calendar = () => {
                     ) : (
                       <Link 
                         to={`/courses/${event.courseId}`} 
-                        className="bg-mci-navy hover:bg-mci-teal text-white text-xs font-bold px-4 py-2 rounded transition-colors"
+                        className="bg-mci-maroon hover:bg-mci-teal text-white text-xs font-bold px-4 py-2 rounded transition-colors"
                       >
                         Book
                       </Link>

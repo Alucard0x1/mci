@@ -62,7 +62,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <span className="text-mci-maroon font-bold text-sm uppercase tracking-widest mb-2 block">Why MCI</span>
-            <h2 className="text-3xl font-bold text-mci-navy mb-4">Three Key Reasons Your Learning Experience is Unique</h2>
+            <h2 className="text-3xl font-bold text-mci-text mb-4">Three Key Reasons Your Learning Experience is Unique</h2>
             <p className="text-gray-600 max-w-3xl mx-auto">In an industry where reliability is non-negotiable, training cannot remain theoretical. Our programs reflect the realities of operating in live, high-stakes environments.</p>
           </div>
 
@@ -71,7 +71,7 @@ const Home = () => {
               <div className="w-14 h-14 bg-mci-maroon rounded-lg flex items-center justify-center text-white mb-6 group-hover:bg-mci-amber transition-colors">
                 <Zap size={28} />
               </div>
-              <h3 className="text-xl font-bold text-mci-navy mb-3">Live Critical Environments</h3>
+              <h3 className="text-xl font-bold text-mci-text mb-3">Live Critical Environments</h3>
               <p className="text-gray-600 text-sm leading-relaxed">Participants are exposed to real-world operating conditions, not simulated scenarios. This hands-on approach ensures learning goes beyond concepts, equipping individuals with the confidence to perform in mission-critical environments.</p>
             </div>
 
@@ -79,7 +79,7 @@ const Home = () => {
               <div className="w-14 h-14 bg-mci-maroon rounded-lg flex items-center justify-center text-white mb-6 group-hover:bg-mci-amber transition-colors">
                 <GraduationCap size={28} />
               </div>
-              <h3 className="text-xl font-bold text-mci-navy mb-3">Instructor-Led Learning</h3>
+              <h3 className="text-xl font-bold text-mci-text mb-3">Instructor-Led Learning</h3>
               <p className="text-gray-600 text-sm leading-relaxed">While many programs have shifted entirely online, we believe mission-critical skills require direct engagement. Our hybrid format enables deeper understanding, real-time problem solving, and direct access to experienced practitioners.</p>
             </div>
 
@@ -87,7 +87,7 @@ const Home = () => {
               <div className="w-14 h-14 bg-mci-maroon rounded-lg flex items-center justify-center text-white mb-6 group-hover:bg-mci-amber transition-colors">
                 <Users size={28} />
               </div>
-              <h3 className="text-xl font-bold text-mci-navy mb-3">Meaningful Industry Relationships</h3>
+              <h3 className="text-xl font-bold text-mci-text mb-3">Meaningful Industry Relationships</h3>
               <p className="text-gray-600 text-sm leading-relaxed">Beyond technical knowledge, participants gain access to a community of peers, operators, and industry leaders. These in-person interactions foster long-term relationships and career opportunities beyond the classroom.</p>
             </div>
           </div>
@@ -99,7 +99,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <span className="text-mci-maroon font-bold text-sm uppercase tracking-widest mb-2 block">Our Programs</span>
-            <h2 className="text-3xl font-bold text-mci-navy mb-4">Applied Professional Programs</h2>
+            <h2 className="text-3xl font-bold text-mci-text mb-4">Applied Professional Programs</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">Industry-led curriculum with structured pathways from Foundation to Executive Diploma level.</p>
           </div>
 
@@ -183,7 +183,7 @@ const Home = () => {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-mci-navy mb-4">Upcoming Sessions</h2>
+            <h2 className="text-3xl font-bold text-mci-text mb-4">Upcoming Sessions</h2>
             <p className="text-gray-600">Scheduled programs across all disciplines.</p>
           </div>
 
@@ -204,14 +204,14 @@ const Home = () => {
               { program: 'Applied Cybersecurity', format: 'Foundation Level', location: 'Singapore', date: 'November 2026', category: 'cybersecurity' },
             ].map((session, idx) => (
               <div key={idx} className="grid grid-cols-1 md:grid-cols-5 gap-2 md:gap-4 p-4 md:p-5 border-b border-gray-100 last:border-0 hover:bg-gray-50 transition-colors items-center">
-                <div className="font-bold text-mci-navy text-sm">{session.program}</div>
+                <div className="font-bold text-mci-text text-sm">{session.program}</div>
                 <div className="text-sm text-gray-600">
                   <span className={`inline-block px-2 py-0.5 rounded text-xs font-bold ${session.format.includes('Online') ? 'bg-blue-50 text-blue-700' : 'bg-amber-50 text-amber-700'}`}>
                     {session.format}
                   </span>
                 </div>
                 <div className="text-sm text-gray-600">{session.location}</div>
-                <div className="text-sm font-medium text-mci-navy">{session.date}</div>
+                <div className="text-sm font-medium text-mci-text">{session.date}</div>
                 <div className="text-right">
                   <Link to={`/programs/${session.category}`} className="inline-block bg-mci-maroon hover:bg-mci-amber text-white text-xs font-bold px-4 py-2 rounded transition-colors">
                     More Info & Book
@@ -222,7 +222,7 @@ const Home = () => {
           </div>
 
           <div className="mt-8 text-center">
-            <Link to="/calendar" className="inline-flex items-center gap-2 text-mci-navy font-bold hover:text-mci-maroon transition-colors">
+            <Link to="/calendar" className="inline-flex items-center gap-2 text-mci-text font-bold hover:text-mci-maroon transition-colors">
               View Full Training Calendar <ChevronRight size={18} />
             </Link>
           </div>
@@ -235,7 +235,7 @@ const Home = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <span className="text-mci-maroon font-bold text-sm uppercase tracking-widest mb-2 block">Industry-Led. Future-Focused. Impact-Driven.</span>
-              <h2 className="text-3xl font-bold text-mci-navy mb-6">What Sets the Institute Apart</h2>
+              <h2 className="text-3xl font-bold text-mci-text mb-6">What Sets the Institute Apart</h2>
               <p className="text-gray-600 mb-8">Our deep integration with the industry ensures that every program delivers real, applicable value.</p>
               <div className="space-y-6">
                 <div className="flex gap-4">
@@ -243,7 +243,7 @@ const Home = () => {
                     <Cpu size={24} />
                   </div>
                   <div>
-                    <h4 className="font-bold text-lg text-mci-navy">Shaped by Real Market Needs</h4>
+                    <h4 className="font-bold text-lg text-mci-text">Shaped by Real Market Needs</h4>
                     <p className="text-gray-600 text-sm">Programs designed around emerging trends in AI, power, cooling, and infrastructure design.</p>
                   </div>
                 </div>
@@ -252,7 +252,7 @@ const Home = () => {
                     <Users size={24} />
                   </div>
                   <div>
-                    <h4 className="font-bold text-lg text-mci-navy">Access to Industry Practitioners</h4>
+                    <h4 className="font-bold text-lg text-mci-text">Access to Industry Practitioners</h4>
                     <p className="text-gray-600 text-sm">Learn from operators, investors, and consultants who are actively shaping the industry.</p>
                   </div>
                 </div>
@@ -261,7 +261,7 @@ const Home = () => {
                     <Award size={24} />
                   </div>
                   <div>
-                    <h4 className="font-bold text-lg text-mci-navy">Practical Over Theoretical</h4>
+                    <h4 className="font-bold text-lg text-mci-text">Practical Over Theoretical</h4>
                     <p className="text-gray-600 text-sm">Focus on applicable skills with exposure to cutting-edge developments in AI data centers and energy-efficient infrastructure.</p>
                   </div>
                 </div>

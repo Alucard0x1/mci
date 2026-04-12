@@ -13,7 +13,7 @@ const Resources = () => {
     <div className="bg-white min-h-screen">
       <div className="bg-mci-lightGrey py-16">
          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-           <h1 className="text-4xl font-bold text-mci-navy mb-4">Insights & Resources</h1>
+           <h1 className="text-4xl font-bold text-mci-text mb-4">Insights & Resources</h1>
            <p className="text-gray-600 max-w-2xl">
              Expert analysis, whitepapers, and webinars on the latest trends in critical infrastructure.
            </p>
@@ -29,7 +29,7 @@ const Resources = () => {
               onClick={() => setFilter(cat)}
               className={`px-4 py-2 rounded-full text-sm font-bold transition-all ${
                 filter === cat 
-                ? 'bg-mci-navy text-white' 
+                ? 'bg-mci-maroon text-white' 
                 : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
               }`}
             >
@@ -59,10 +59,10 @@ const Resources = () => {
                
                <div className="p-6 flex flex-col flex-grow">
                  <div className="text-gray-400 text-xs font-medium mb-3">{resource.date}</div>
-                 <h3 className="text-xl font-bold text-mci-navy mb-3 line-clamp-2 group-hover:text-mci-teal transition-colors">{resource.title}</h3>
+                 <h3 className="text-xl font-bold text-mci-text mb-3 line-clamp-2 group-hover:text-mci-teal transition-colors">{resource.title}</h3>
                  <p className="text-gray-600 text-sm mb-6 flex-grow line-clamp-3">{resource.summary}</p>
                  
-                 <a href="#" className="inline-flex items-center gap-2 text-mci-navy font-bold text-sm animated-link mt-auto">
+                 <a href="#" className="inline-flex items-center gap-2 text-mci-text font-bold text-sm animated-link mt-auto">
                    {resource.type === 'Webinar' ? 'Watch Now' : 'Read Article'} <ArrowRight size={16} />
                  </a>
                </div>

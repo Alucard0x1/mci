@@ -74,7 +74,7 @@ const Contact = () => {
 
   return (
     <div className="bg-white min-h-screen">
-      <div className="bg-mci-navy text-white py-16">
+      <div className="bg-mci-maroon text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
           <p className="text-gray-300 max-w-2xl mx-auto">Get in touch with our admissions team or request a quote for corporate training.</p>
@@ -86,7 +86,7 @@ const Contact = () => {
           
           {/* Info Side */}
           <div>
-            <h2 className="text-2xl font-bold text-mci-navy mb-8">Get in Touch</h2>
+            <h2 className="text-2xl font-bold text-mci-text mb-8">Get in Touch</h2>
             
             <div className="space-y-8 mb-12">
               <div className="flex items-start gap-4">
@@ -94,7 +94,7 @@ const Contact = () => {
                   <Phone size={24} />
                 </div>
                 <div>
-                  <h3 className="font-bold text-mci-navy">Phone</h3>
+                  <h3 className="font-bold text-mci-text">Phone</h3>
                   <p className="text-gray-600">+44 20 1234 5678</p>
                   <p className="text-sm text-gray-500">Mon-Fri, 9am - 6pm GMT</p>
                 </div>
@@ -105,7 +105,7 @@ const Contact = () => {
                   <Mail size={24} />
                 </div>
                 <div>
-                  <h3 className="font-bold text-mci-navy">Email</h3>
+                  <h3 className="font-bold text-mci-text">Email</h3>
                   <p className="text-gray-600">admissions@mci-training.com</p>
                   <p className="text-gray-600">corporate@mci-training.com</p>
                 </div>
@@ -116,7 +116,7 @@ const Contact = () => {
                   <MapPin size={24} />
                 </div>
                 <div>
-                  <h3 className="font-bold text-mci-navy">Headquarters</h3>
+                  <h3 className="font-bold text-mci-text">Headquarters</h3>
                   <p className="text-gray-600">
                     123 Innovation Drive<br />
                     Tech Park, London<br />
@@ -127,7 +127,7 @@ const Contact = () => {
             </div>
 
             <div className="bg-mci-lightGrey p-8 rounded-lg">
-              <h3 className="font-bold text-mci-navy mb-2">For Current Students</h3>
+              <h3 className="font-bold text-mci-text mb-2">For Current Students</h3>
               <p className="text-gray-600 text-sm mb-4">Access the learning portal for course materials and exam schedules.</p>
               <a href="#" className="text-mci-teal font-bold hover:underline animated-link">Log in to Student Portal &rarr;</a>
             </div>
@@ -138,7 +138,7 @@ const Contact = () => {
             {!isSubmitted ? (
               <form onSubmit={handleSubmit} className="space-y-6" noValidate>
                 <div>
-                  <label htmlFor="type" className="block text-sm font-bold text-mci-navy mb-2">Enquiry Type</label>
+                  <label htmlFor="type" className="block text-sm font-bold text-mci-text mb-2">Enquiry Type</label>
                   <div className="relative">
                     <select 
                       id="type"
@@ -156,7 +156,7 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="name" className="block text-sm font-bold text-mci-navy mb-2">Full Name</label>
+                  <label htmlFor="name" className="block text-sm font-bold text-mci-text mb-2">Full Name</label>
                   <div className="relative">
                     <input 
                       type="text" 
@@ -180,7 +180,7 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-bold text-mci-navy mb-2">Email Address</label>
+                  <label htmlFor="email" className="block text-sm font-bold text-mci-text mb-2">Email Address</label>
                   <div className="relative">
                     <input 
                       type="email" 
@@ -204,7 +204,7 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-bold text-mci-navy mb-2">Message</label>
+                  <label htmlFor="message" className="block text-sm font-bold text-mci-text mb-2">Message</label>
                   <div className="relative">
                     <textarea 
                       id="message"
@@ -244,7 +244,7 @@ const Contact = () => {
                 <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center text-green-600 mb-6">
                   <Check size={32} />
                 </div>
-                <h3 className="text-2xl font-bold text-mci-navy mb-2">Message Sent</h3>
+                <h3 className="text-2xl font-bold text-mci-text mb-2">Message Sent</h3>
                 <p className="text-gray-600">Thank you for your enquiry. Our team will get back to you within 24 hours.</p>
                 <button 
                   onClick={() => {

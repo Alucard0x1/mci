@@ -5,7 +5,7 @@ import { HelpCircle, FileCheck, Users, CreditCard } from 'lucide-react';
 const Admissions = () => {
   return (
     <div className="bg-white pb-20">
-      <div className="bg-mci-navy text-white py-16">
+      <div className="bg-mci-maroon text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-3xl md:text-4xl font-bold mb-4">Admissions & FAQ</h1>
           <p className="text-gray-300 max-w-2xl mx-auto">Everything you need to know about enrolling in our professional programs.</p>
@@ -16,10 +16,10 @@ const Admissions = () => {
         
         <section>
           <div className="flex items-center gap-4 mb-6">
-            <div className="p-3 bg-mci-lightGrey rounded-full text-mci-navy">
+            <div className="p-3 bg-mci-lightGrey rounded-full text-mci-text">
               <FileCheck size={24} />
             </div>
-            <h2 className="text-2xl font-bold text-mci-navy">How to Apply</h2>
+            <h2 className="text-2xl font-bold text-mci-text">How to Apply</h2>
           </div>
           <div className="prose max-w-none text-gray-600">
             <p className="mb-4">Enrolling in MCI courses is a straightforward process designed for working professionals.</p>
@@ -35,10 +35,10 @@ const Admissions = () => {
 
         <section>
           <div className="flex items-center gap-4 mb-6">
-            <div className="p-3 bg-mci-lightGrey rounded-full text-mci-navy">
+            <div className="p-3 bg-mci-lightGrey rounded-full text-mci-text">
               <Users size={24} />
             </div>
-            <h2 className="text-2xl font-bold text-mci-navy">Corporate & Group Booking</h2>
+            <h2 className="text-2xl font-bold text-mci-text">Corporate & Group Booking</h2>
           </div>
           <div className="prose max-w-none text-gray-600">
              <p className="mb-4">For teams of 5 or more, we offer customized pricing and dedicated sessions.</p>
@@ -53,14 +53,14 @@ const Admissions = () => {
 
         <section>
           <div className="flex items-center gap-4 mb-6">
-            <div className="p-3 bg-mci-lightGrey rounded-full text-mci-navy">
+            <div className="p-3 bg-mci-lightGrey rounded-full text-mci-text">
               <HelpCircle size={24} />
             </div>
-            <h2 className="text-2xl font-bold text-mci-navy">Frequently Asked Questions</h2>
+            <h2 className="text-2xl font-bold text-mci-text">Frequently Asked Questions</h2>
           </div>
           <div className="space-y-6">
             <details className="group p-4 border border-gray-200 rounded-lg open:bg-gray-50 transition-colors">
-              <summary className="font-bold text-mci-navy cursor-pointer list-none flex justify-between items-center">
+              <summary className="font-bold text-mci-text cursor-pointer list-none flex justify-between items-center">
                 Do I receive a certificate upon completion?
                 <span className="text-mci-teal font-bold group-open:rotate-45 transition-transform">+</span>
               </summary>
@@ -70,7 +70,7 @@ const Admissions = () => {
             </details>
 
             <details className="group p-4 border border-gray-200 rounded-lg open:bg-gray-50 transition-colors">
-              <summary className="font-bold text-mci-navy cursor-pointer list-none flex justify-between items-center">
+              <summary className="font-bold text-mci-text cursor-pointer list-none flex justify-between items-center">
                 What happens if I need to cancel?
                 <span className="text-mci-teal font-bold group-open:rotate-45 transition-transform">+</span>
               </summary>
@@ -80,7 +80,7 @@ const Admissions = () => {
             </details>
 
             <details className="group p-4 border border-gray-200 rounded-lg open:bg-gray-50 transition-colors">
-              <summary className="font-bold text-mci-navy cursor-pointer list-none flex justify-between items-center">
+              <summary className="font-bold text-mci-text cursor-pointer list-none flex justify-between items-center">
                 Are virtual classes live?
                 <span className="text-mci-teal font-bold group-open:rotate-45 transition-transform">+</span>
               </summary>

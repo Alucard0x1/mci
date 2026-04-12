@@ -6,7 +6,7 @@ const About = () => {
   return (
     <div className="bg-white">
       {/* Header */}
-      <div className="bg-mci-navy text-white py-20">
+      <div className="bg-mci-maroon text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
            <span className="text-mci-amber font-bold text-sm uppercase tracking-widest mb-4 block">Our Institution</span>
            <h1 className="text-4xl md:text-5xl font-bold mb-6">About MCI Training</h1>
@@ -20,24 +20,24 @@ const About = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
           <div className="p-8 bg-gray-50 rounded-lg">
-            <div className="w-16 h-16 bg-mci-navy/10 text-mci-navy rounded-full flex items-center justify-center mx-auto mb-6">
+            <div className="w-16 h-16 bg-mci-maroon/10 text-mci-text rounded-full flex items-center justify-center mx-auto mb-6">
               <Target size={32} />
             </div>
-            <h3 className="text-xl font-bold text-mci-navy mb-4">Our Mission</h3>
+            <h3 className="text-xl font-bold text-mci-text mb-4">Our Mission</h3>
             <p className="text-gray-600">To bridge the gap between theoretical standards and practical application, ensuring professionals are ready for real-world crises.</p>
           </div>
           <div className="p-8 bg-gray-50 rounded-lg">
-            <div className="w-16 h-16 bg-mci-navy/10 text-mci-navy rounded-full flex items-center justify-center mx-auto mb-6">
+            <div className="w-16 h-16 bg-mci-maroon/10 text-mci-text rounded-full flex items-center justify-center mx-auto mb-6">
               <Globe size={32} />
             </div>
-            <h3 className="text-xl font-bold text-mci-navy mb-4">Global Standards</h3>
+            <h3 className="text-xl font-bold text-mci-text mb-4">Global Standards</h3>
             <p className="text-gray-600">We adhere strictly to international frameworks including ISO, EN, TIA, and NIST to ensure your certification is recognized worldwide.</p>
           </div>
           <div className="p-8 bg-gray-50 rounded-lg">
-            <div className="w-16 h-16 bg-mci-navy/10 text-mci-navy rounded-full flex items-center justify-center mx-auto mb-6">
+            <div className="w-16 h-16 bg-mci-maroon/10 text-mci-text rounded-full flex items-center justify-center mx-auto mb-6">
               <Users size={32} />
             </div>
-            <h3 className="text-xl font-bold text-mci-navy mb-4">Expert Faculty</h3>
+            <h3 className="text-xl font-bold text-mci-text mb-4">Expert Faculty</h3>
             <p className="text-gray-600">Our instructors aren't just teachers; they are active consultants and auditors with decades of field experience.</p>
           </div>
         </div>
@@ -49,12 +49,12 @@ const About = () => {
            <div className="flex flex-col md:flex-row gap-16 items-center">
              <div className="flex-1">
                <span className="text-mci-teal font-bold text-sm uppercase tracking-widest mb-2 block">Student Stories</span>
-               <h2 className="text-3xl font-bold text-mci-navy mb-6">Hear from our Alumni</h2>
+               <h2 className="text-3xl font-bold text-mci-text mb-6">Hear from our Alumni</h2>
                <p className="text-gray-600 text-lg mb-8">
                  "MCI's training wasn't just about passing an exam. The practical exercises in BCM implementation helped me navigate a real ransomware attack just 3 months later. It's not an exaggeration to say this training saved our quarter."
                </p>
                <div>
-                  <div className="font-bold text-mci-navy text-lg">David R.</div>
+                  <div className="font-bold text-mci-text text-lg">David R.</div>
                   <div className="text-gray-500">Chief Risk Officer, FinTech Global</div>
                </div>
              </div>
@@ -84,7 +84,7 @@ const About = () => {
       <div className="bg-mci-lightGrey py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-mci-navy mb-4">Meet Our Faculty</h2>
+            <h2 className="text-3xl font-bold text-mci-text mb-4">Meet Our Faculty</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">Learn from the architects and auditors who shape the industry.</p>
           </div>
 
@@ -94,7 +94,7 @@ const About = () => {
                 <div className="flex items-center gap-4 mb-4">
                   <img src={instructor.imageUrl} alt={instructor.name} className="w-20 h-20 rounded-full object-cover" />
                   <div>
-                    <h3 className="font-bold text-mci-navy text-lg">{instructor.name}</h3>
+                    <h3 className="font-bold text-mci-text text-lg">{instructor.name}</h3>
                     <p className="text-mci-teal text-sm font-medium">{instructor.title}</p>
                   </div>
                 </div>
@@ -102,7 +102,7 @@ const About = () => {
                   {instructor.bio}
                 </p>
                 <div className="mt-6 pt-4 border-t border-gray-100 flex justify-end">
-                   <button className="text-mci-navy text-sm font-bold hover:text-mci-teal transition-colors">View Full Profile &rarr;</button>
+                   <button className="text-mci-text text-sm font-bold hover:text-mci-teal transition-colors">View Full Profile &rarr;</button>
                 </div>
               </div>
             ))}
