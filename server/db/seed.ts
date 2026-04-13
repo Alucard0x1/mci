@@ -117,7 +117,13 @@ export function seed() {
   insResource.run('Guide', 'SCADA Security Essentials', 'Oct 05, 2025', 'Cybersecurity', 'A definitive guide to securing operational technology environments against modern threats.', 'https://images.unsplash.com/photo-1551808525-51a943718d53?auto=format&fit=crop&q=80&w=800');
   insResource.run('Report', 'Global Data Center Market Trends 2026', 'Sep 12, 2025', 'Data Center', 'Market analysis focusing on the shift towards edge computing and sustainable infrastructure.', 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800');
 
-  // --- Partner Logos ---
+  // --- Partners ---
+  const insPartner = db.prepare('INSERT INTO partners (name, logo_url, sort_order) VALUES (?,?,?)');
+  ['Partner 1', 'Partner 2', 'Partner 3', 'Partner 4'].forEach((name, i) => {
+    insPartner.run(name, null, i);
+  });
+
+  // Legacy logos table
   const insLogo = db.prepare('INSERT INTO alumni_logos (name, url) VALUES (?,?)');
   ['Partner 1', 'Partner 2', 'Partner 3', 'Partner 4'].forEach(name => {
     insLogo.run(name, `https://placehold.co/120x40/white/111111?text=${encodeURIComponent(name)}`);

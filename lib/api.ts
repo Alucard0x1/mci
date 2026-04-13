@@ -59,4 +59,27 @@ export const api = {
     request(`/courses/admin/${id}`, { method: 'DELETE' }),
   togglePublishCourse: (id: string) =>
     request(`/courses/admin/${id}/publish`, { method: 'PATCH' }),
+
+  // Partners
+  getPartners: () => request('/partners'),
+  getAdminPartners: () => request('/partners/admin/all'),
+  createPartner: (data: any) =>
+    request('/partners/admin', { method: 'POST', body: JSON.stringify(data) }),
+  updatePartner: (id: number, data: any) =>
+    request(`/partners/admin/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  deletePartner: (id: number) =>
+    request(`/partners/admin/${id}`, { method: 'DELETE' }),
+  togglePartnerVisibility: (id: number) =>
+    request(`/partners/admin/${id}/visibility`, { method: 'PATCH' }),
+
+  // Instructors
+  getInstructors: () => request('/instructors'),
+  getInstructor: (id: string) => request(`/instructors/${id}`),
+  getAdminInstructors: () => request('/instructors/admin/all'),
+  createInstructor: (data: any) =>
+    request('/instructors/admin', { method: 'POST', body: JSON.stringify(data) }),
+  updateInstructor: (id: string, data: any) =>
+    request(`/instructors/admin/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  deleteInstructor: (id: string) =>
+    request(`/instructors/admin/${id}`, { method: 'DELETE' }),
 };

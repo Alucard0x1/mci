@@ -26,11 +26,7 @@ router.get('/resources', (req: Request, res: Response) => {
   }
 });
 
-// GET /api/instructors
-router.get('/instructors', (_req: Request, res: Response) => {
-  const db = getDb();
-  res.json(db.prepare('SELECT * FROM instructors').all());
-});
+// GET /api/instructors — moved to dedicated instructors route
 
 // GET /api/calendar — all schedules with course info
 router.get('/calendar', (req: Request, res: Response) => {

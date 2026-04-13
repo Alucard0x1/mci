@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Shield, Server, Activity, ChevronRight, Award, Users, CheckCircle, Zap, BookOpen, GraduationCap, Building2, Globe, Cpu } from 'lucide-react';
 import CourseCard from '../components/CourseCard';
 import { COURSES, TESTIMONIALS, ALUMNI_LOGOS } from '../constants';
+import { api } from '../lib/api';
+
+interface Partner {
+  id: number;
+  name: string;
+  logoUrl: string | null;
+  websiteUrl: string | null;
+}
 
 const Home = () => {
   const featuredCourses = COURSES.slice(0, 3);
+  const [partners, setPartners] = useState<Partner[]>([]);
+
+  useEffect(() => {
+    api.getPartners().then(setPartners).catch(() => {});
+  }, []);
 
   return (
     <div className="flex flex-col">
@@ -44,18 +57,29 @@ const Home = () => {
       </section>
 
       {/* Supported By / Partner Logos */}
-      <section className="bg-white border-b border-gray-100 py-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center text-sm font-bold text-gray-400 uppercase tracking-widest mb-8">Supported By</p>
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
-            {['Partner 1', 'Partner 2', 'Partner 3', 'Partner 4'].map((partner, idx) => (
-              <div key={idx} className="px-8 py-3 border border-gray-200 rounded text-gray-500 font-medium text-sm">
-                {partner}
-              </div>
-            ))}
+      {partners.length > 0 && (
+        <section className="bg-white border-b border-gray-100 py-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p className="text-center text-sm font-bold text-gray-400 uppercase tracking-widest mb-8">Supported By</p>
+            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
+              {partners.map(partner => (
+                <div key={partner.id}>
+                  {partner.logoUrl ? (
+                    <a href={partner.websiteUrl || '#'} target={partner.websiteUrl ? '_blank' : undefined} rel="noopener noreferrer" className="block">
+                      <img src={partner.logoUrl} alt={partner.name} className="h-10 object-contain opacity-70 hover:opacity-100 transition-opacity" />
+                    </a>
+                  ) : (
+                    <a href={partner.websiteUrl || '#'} target={partner.websiteUrl ? '_blank' : undefined} rel="noopener noreferrer"
+                      className="px-8 py-3 border border-gray-200 rounded text-gray-500 font-medium text-sm hover:border-gray-400 transition-colors block">
+                      {partner.name}
+                    </a>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* What Sets Us Apart — 3 Key Reasons */}
       <section className="py-20 bg-white">

@@ -196,7 +196,18 @@ export function initDb() {
       company TEXT NOT NULL
     );
 
-    -- Alumni / partner logos
+    -- Partners (Supported By logos)
+    CREATE TABLE IF NOT EXISTS partners (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL,
+      logo_url TEXT,
+      website_url TEXT,
+      sort_order INTEGER NOT NULL DEFAULT 0,
+      is_visible INTEGER NOT NULL DEFAULT 1,
+      created_at TEXT NOT NULL DEFAULT (datetime('now'))
+    );
+
+    -- Legacy alias
     CREATE TABLE IF NOT EXISTS alumni_logos (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL,

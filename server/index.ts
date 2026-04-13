@@ -8,6 +8,8 @@ import authRoutes from './routes/auth';
 import courseRoutes from './routes/courses';
 import publicRoutes from './routes/public';
 import dashboardRoutes from './routes/dashboard';
+import partnerRoutes from './routes/partners';
+import instructorRoutes from './routes/instructors';
 
 dotenv.config();
 
@@ -25,6 +27,8 @@ seed();
 // API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/courses', courseRoutes);
+app.use('/api/partners', partnerRoutes);
+app.use('/api/instructors', instructorRoutes);
 app.use('/api', publicRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 

@@ -4,9 +4,11 @@ import { useAuth } from '../lib/AuthContext';
 import { api } from '../lib/api';
 import {
   BookOpen, CalendarDays, MessageSquare, Download, Bell,
-  LogOut, Loader2, LayoutDashboard, GraduationCap
+  LogOut, Loader2, LayoutDashboard, GraduationCap, Handshake, UserCircle
 } from 'lucide-react';
 import DashboardCourses from './DashboardCourses';
+import DashboardPartners from './DashboardPartners';
+import DashboardInstructors from './DashboardInstructors';
 
 interface Stats {
   courseCount: number;
@@ -16,7 +18,7 @@ interface Stats {
   waitlistCount: number;
 }
 
-type Page = 'overview' | 'courses';
+type Page = 'overview' | 'courses' | 'partners' | 'instructors';
 
 const Dashboard = () => {
   const { user, logout, loading: authLoading } = useAuth();
@@ -68,6 +70,8 @@ const Dashboard = () => {
   const sidebarItems = [
     { id: 'overview' as Page, label: 'Overview', icon: LayoutDashboard },
     { id: 'courses' as Page, label: 'Courses', icon: GraduationCap },
+    { id: 'instructors' as Page, label: 'Instructors', icon: UserCircle },
+    { id: 'partners' as Page, label: 'Partners', icon: Handshake },
   ];
 
   return (
@@ -177,6 +181,8 @@ const Dashboard = () => {
           )}
 
           {activePage === 'courses' && <DashboardCourses />}
+          {activePage === 'instructors' && <DashboardInstructors />}
+          {activePage === 'partners' && <DashboardPartners />}
         </div>
       </div>
     </div>
