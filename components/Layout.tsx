@@ -119,7 +119,7 @@ const Navbar = () => {
         <TopBanner />
         <nav 
           className={`w-full transition-all duration-300 border-b ${
-            isScrolled ? 'bg-white py-2 shadow-md border-gray-200' : 'bg-white py-4 border-transparent'
+            isScrolled ? 'bg-white py-2 shadow-md border-gray-200' : 'bg-mci-maroon py-4 border-transparent'
           }`}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -128,7 +128,7 @@ const Navbar = () => {
               <div className="flex-shrink-0 flex items-center">
                 <Link to="/" className="flex items-center group">
                   <img 
-                    src="/mcired.png"
+                    src={isScrolled ? '/mcired.png' : '/mciwhite.png'}
                     alt="MCI Training Institute" 
                     className="h-10 w-auto transition-all duration-300"
                   />
@@ -143,7 +143,7 @@ const Navbar = () => {
                   onMouseLeave={handleMenuLeave}
                 >
                   <button 
-                    className={`text-mci-text hover:text-mci-teal font-medium flex items-center gap-1 py-2 ${isProgramMenuOpen ? 'text-mci-teal' : ''}`}
+                    className={`${isScrolled ? 'text-mci-text' : 'text-white'} hover:text-mci-amber font-medium flex items-center gap-1 py-2 ${isProgramMenuOpen ? 'text-mci-amber' : ''}`}
                   >
                     Programs <ChevronDown size={16} className={`transition-transform duration-300 ${isProgramMenuOpen ? 'rotate-180' : ''}`} />
                   </button>
@@ -227,20 +227,20 @@ const Navbar = () => {
                   </div>
                 </div>
 
-                <Link to="/corporate" className="text-mci-text hover:text-mci-teal font-medium transition-colors">Corporate</Link>
-                <Link to="/about" className="text-mci-text hover:text-mci-teal font-medium transition-colors">About Us</Link>
-                <Link to="/resources" className="text-mci-text hover:text-mci-teal font-medium transition-colors">Resources</Link>
+                <Link to="/corporate" className={`${isScrolled ? 'text-mci-text' : 'text-white'} hover:text-mci-amber font-medium transition-colors`}>Corporate</Link>
+                <Link to="/about" className={`${isScrolled ? 'text-mci-text' : 'text-white'} hover:text-mci-amber font-medium transition-colors`}>About Us</Link>
+                <Link to="/resources" className={`${isScrolled ? 'text-mci-text' : 'text-white'} hover:text-mci-amber font-medium transition-colors`}>Resources</Link>
               </div>
 
               {/* Right Utilities */}
               <div className="hidden md:flex items-center space-x-6">
                 <button 
                   onClick={() => setIsSearchOpen(true)}
-                  className="text-gray-500 hover:text-mci-teal transition-colors"
+                  className={`${isScrolled ? 'text-gray-500' : 'text-white/70'} hover:text-mci-amber transition-colors`}
                 >
                   <Search size={20} />
                 </button>
-                <Link to="/contact" className="text-mci-text font-medium hover:underline decoration-mci-teal underline-offset-4">
+                <Link to="/contact" className={`${isScrolled ? 'text-mci-text' : 'text-white'} font-medium hover:text-mci-amber transition-colors`}>
                   Contact
                 </Link>
                 <Link 
@@ -255,7 +255,7 @@ const Navbar = () => {
               <div className="md:hidden flex items-center">
                 <button 
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                  className="text-mci-text p-2"
+                  className={`${isScrolled ? 'text-mci-text' : 'text-white'} p-2`}
                 >
                   {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>
