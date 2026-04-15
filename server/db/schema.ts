@@ -213,6 +213,19 @@ export function initDb() {
       name TEXT NOT NULL,
       url TEXT NOT NULL
     );
+
+    -- Board Members
+    CREATE TABLE IF NOT EXISTS board_members (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL,
+      position TEXT NOT NULL,
+      bio TEXT NOT NULL DEFAULT '',
+      image_url TEXT,
+      linkedin_url TEXT,
+      sort_order INTEGER NOT NULL DEFAULT 0,
+      is_visible INTEGER NOT NULL DEFAULT 1,
+      created_at TEXT NOT NULL DEFAULT (datetime('now'))
+    );
   `);
 
   return db;

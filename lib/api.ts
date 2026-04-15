@@ -82,4 +82,16 @@ export const api = {
     request(`/instructors/admin/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
   deleteInstructor: (id: string) =>
     request(`/instructors/admin/${id}`, { method: 'DELETE' }),
+
+  // Board Members
+  getBoardMembers: () => request('/board-members'),
+  getAdminBoardMembers: () => request('/board-members/admin/all'),
+  createBoardMember: (data: any) =>
+    request('/board-members/admin', { method: 'POST', body: JSON.stringify(data) }),
+  updateBoardMember: (id: number, data: any) =>
+    request(`/board-members/admin/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  deleteBoardMember: (id: number) =>
+    request(`/board-members/admin/${id}`, { method: 'DELETE' }),
+  toggleBoardMemberVisibility: (id: number) =>
+    request(`/board-members/admin/${id}/visibility`, { method: 'PATCH' }),
 };

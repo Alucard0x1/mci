@@ -1,15 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { INSTRUCTORS } from '../constants';
-import { Target, Users, Globe, Play } from 'lucide-react';
+import { Target, Users, Globe, Play, Linkedin, User } from 'lucide-react';
+import { api } from '../lib/api';
+
+interface BoardMember {
+  id: number;
+  name: string;
+  position: string;
+  bio: string;
+  imageUrl: string | null;
+  linkedinUrl: string | null;
+}
 
 const About = () => {
+  const [boardMembers, setBoardMembers] = useState<BoardMember[]>([]);
+
+  useEffect(() => {
+    api.getBoardMembers().then(setBoardMembers).catch(() => {});
+  }, []);
+
   return (
     <div className="bg-white">
       {/* Header */}
       <div className="bg-mci-maroon text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
            <span className="text-mci-amber font-bold text-sm uppercase tracking-widest mb-4 block">Our Institution</span>
-           <h1 className="text-4xl md:text-5xl font-bold mb-6">About MCI Training</h1>
+           <h1 className="text-4xl md:text-5xl font-bold mb-6">About Mission Critical Institute</h1>
            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
              Dedicated to building global resilience through expert-led education in critical infrastructure.
            </p>
@@ -43,6 +59,42 @@ const About = () => {
         </div>
       </div>
 
+      {/* Board Members — only shown when data exists */}
+      {boardMembers.length > 0 && (
+        <div className="bg-white py-20 border-t border-gray-100">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <span className="text-mci-maroon font-bold text-sm uppercase tracking-widest mb-2 block">Leadership</span>
+              <h2 className="text-3xl font-bold text-mci-text mb-4">Board Members</h2>
+              <p className="text-gray-600 max-w-2xl mx-auto">The leaders and advisors shaping the strategic direction of Mission Critical Institute.</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {boardMembers.map(member => (
+                <div key={member.id} className="bg-white p-6 rounded-xl border border-gray-100 hover:shadow-lg transition-all text-center">
+                  {member.imageUrl ? (
+                    <img src={member.imageUrl} alt={member.name} className="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-4 border-gray-50" />
+                  ) : (
+                    <div className="w-24 h-24 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-4 text-gray-400">
+                      <User size={40} />
+                    </div>
+                  )}
+                  <h3 className="font-bold text-mci-text text-lg">{member.name}</h3>
+                  <p className="text-mci-maroon text-sm font-medium mb-3">{member.position}</p>
+                  {member.bio && <p className="text-gray-600 text-sm leading-relaxed mb-4">{member.bio}</p>}
+                  {member.linkedinUrl && (
+                    <a href={member.linkedinUrl} target="_blank" rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-blue-600 text-sm font-medium hover:underline">
+                      <Linkedin size={14} /> LinkedIn Profile
+                    </a>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Video Testimonials Section */}
       <div className="bg-white py-20 border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -58,14 +110,9 @@ const About = () => {
                   <div className="text-gray-500">Chief Risk Officer, FinTech Global</div>
                </div>
              </div>
-             
              <div className="flex-1 relative group cursor-pointer w-full">
                <div className="aspect-video bg-gray-900 rounded-xl overflow-hidden relative shadow-2xl">
-                 <img 
-                    src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                    alt="Video Thumbnail" 
-                    className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity"
-                 />
+                 <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Video Thumbnail" className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity" />
                  <div className="absolute inset-0 flex items-center justify-center">
                    <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                      <div className="w-16 h-16 bg-mci-amber rounded-full flex items-center justify-center shadow-lg">
@@ -74,7 +121,6 @@ const About = () => {
                    </div>
                  </div>
                </div>
-               <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-dots-pattern opacity-20"></div>
              </div>
            </div>
         </div>
@@ -87,7 +133,6 @@ const About = () => {
             <h2 className="text-3xl font-bold text-mci-text mb-4">Meet Our Faculty</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">Learn from the architects and auditors who shape the industry.</p>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {Object.values(INSTRUCTORS).map(instructor => (
               <div key={instructor.id} className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-all">
@@ -98,12 +143,7 @@ const About = () => {
                     <p className="text-mci-teal text-sm font-medium">{instructor.title}</p>
                   </div>
                 </div>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  {instructor.bio}
-                </p>
-                <div className="mt-6 pt-4 border-t border-gray-100 flex justify-end">
-                   <button className="text-mci-text text-sm font-bold hover:text-mci-teal transition-colors">View Full Profile &rarr;</button>
-                </div>
+                <p className="text-gray-600 text-sm leading-relaxed">{instructor.bio}</p>
               </div>
             ))}
           </div>

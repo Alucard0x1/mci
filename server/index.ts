@@ -10,6 +10,7 @@ import publicRoutes from './routes/public';
 import dashboardRoutes from './routes/dashboard';
 import partnerRoutes from './routes/partners';
 import instructorRoutes from './routes/instructors';
+import boardMemberRoutes from './routes/boardMembers';
 
 dotenv.config();
 
@@ -29,6 +30,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/courses', courseRoutes);
 app.use('/api/partners', partnerRoutes);
 app.use('/api/instructors', instructorRoutes);
+app.use('/api/board-members', boardMemberRoutes);
 app.use('/api', publicRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 
