@@ -362,6 +362,7 @@ const Footer = () => {
               <li><Link to="/about" className="hover:text-white transition-colors">About Us</Link></li>
               <li><Link to="/corporate" className="hover:text-white transition-colors">Corporate Solutions</Link></li>
               <li><Link to="/admissions" className="hover:text-white transition-colors">Admissions</Link></li>
+              <li><Link to="/policy" className="hover:text-white transition-colors">Policies</Link></li>
               <li><Link to="/resources" className="hover:text-white transition-colors">Resources</Link></li>
             </ul>
           </div>
@@ -389,6 +390,7 @@ const Footer = () => {
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400">
           <p>&copy; {new Date().getFullYear()} MCI Training Institute. All rights reserved.</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
+            <Link to="/policy" className="hover:text-white">Registration & Student Policy</Link>
             <Link to="/privacy" className="hover:text-white">Privacy Policy</Link>
             <Link to="/terms" className="hover:text-white">Terms of Service</Link>
             <Link to="/cookies" className="hover:text-white">Cookie Policy</Link>

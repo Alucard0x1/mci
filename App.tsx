@@ -13,6 +13,7 @@ import Admissions from './pages/Admissions';
 import Corporate from './pages/Corporate';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
+import Policy from './pages/Policy';
 
 // Scroll to top on route change
 const ScrollToTop = () => {
@@ -46,6 +47,7 @@ const App = () => {
                 <Route path="/about" element={<About />} />
                 <Route path="/resources" element={<Resources />} />
                 <Route path="/admissions" element={<Admissions />} />
+                <Route path="/policy" element={<Policy />} />
               </Routes>
             </Layout>
           } />
