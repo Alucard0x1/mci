@@ -14,6 +14,8 @@ import Corporate from './pages/Corporate';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Policy from './pages/Policy';
+import Register from './pages/Register';
+import RegisterConfirmation from './pages/RegisterConfirmation';
 
 // Scroll to top on route change
 const ScrollToTop = () => {
@@ -48,6 +50,8 @@ const App = () => {
                 <Route path="/resources" element={<Resources />} />
                 <Route path="/admissions" element={<Admissions />} />
                 <Route path="/policy" element={<Policy />} />
+                <Route path="/register/:courseId" element={<Register />} />
+                <Route path="/register/confirmation/:registrationId" element={<RegisterConfirmation />} />
               </Routes>
             </Layout>
           } />

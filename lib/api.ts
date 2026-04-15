@@ -94,4 +94,16 @@ export const api = {
     request(`/board-members/admin/${id}`, { method: 'DELETE' }),
   toggleBoardMemberVisibility: (id: number) =>
     request(`/board-members/admin/${id}/visibility`, { method: 'PATCH' }),
+
+  // Registrations
+  createRegistration: (data: any) =>
+    request('/registrations', { method: 'POST', body: JSON.stringify(data) }),
+  checkoutRegistration: (id: string) =>
+    request(`/registrations/${id}/checkout`, { method: 'POST' }),
+  getRegistration: (id: string) => request(`/registrations/${id}`),
+  validatePromo: (code: string, courseId: string) =>
+    request('/registrations/validate-promo', { method: 'POST', body: JSON.stringify({ code, courseId }) }),
+  getAdminRegistrations: () => request('/registrations/admin/all'),
+  updateRegistrationStatus: (id: string, data: any) =>
+    request(`/registrations/admin/${id}/status`, { method: 'PATCH', body: JSON.stringify(data) }),
 };

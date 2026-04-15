@@ -226,6 +226,59 @@ export function initDb() {
       is_visible INTEGER NOT NULL DEFAULT 1,
       created_at TEXT NOT NULL DEFAULT (datetime('now'))
     );
+
+    -- Registrations
+    CREATE TABLE IF NOT EXISTS registrations (
+      id TEXT PRIMARY KEY,
+      registration_number TEXT UNIQUE NOT NULL,
+      course_id TEXT NOT NULL,
+      schedule_id TEXT,
+      status TEXT NOT NULL DEFAULT 'pending_payment',
+      
+      -- Participant info
+      full_name TEXT NOT NULL,
+      email TEXT NOT NULL,
+      phone TEXT,
+      company TEXT,
+      job_title TEXT,
+      country TEXT,
+      po_number TEXT,
+      
+      -- Pricing
+      subtotal REAL NOT NULL DEFAULT 0,
+      discount REAL NOT NULL DEFAULT 0,
+      tax REAL NOT NULL DEFAULT 0,
+      total REAL NOT NULL DEFAULT 0,
+      promo_code TEXT,
+      
+      -- Payment
+      payment_method TEXT NOT NULL DEFAULT 'card',
+      payment_status TEXT NOT NULL DEFAULT 'unpaid',
+      payment_reference TEXT,
+      stripe_session_id TEXT,
+      stripe_payment_intent TEXT,
+      
+      notes TEXT,
+      created_at TEXT NOT NULL DEFAULT (datetime('now')),
+      paid_at TEXT,
+      
+      FOREIGN KEY (course_id) REFERENCES courses(id),
+      FOREIGN KEY (schedule_id) REFERENCES schedules(id)
+    );
+
+    -- Promo Codes
+    CREATE TABLE IF NOT EXISTS promo_codes (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      code TEXT UNIQUE NOT NULL,
+      discount_type TEXT NOT NULL DEFAULT 'percentage',
+      discount_value REAL NOT NULL DEFAULT 0,
+      valid_from TEXT,
+      valid_until TEXT,
+      max_uses INTEGER DEFAULT 0,
+      current_uses INTEGER DEFAULT 0,
+      is_active INTEGER NOT NULL DEFAULT 1,
+      created_at TEXT NOT NULL DEFAULT (datetime('now'))
+    );
   `);
 
   return db;
