@@ -7,7 +7,12 @@ import { sendRegistrationConfirmation } from '../services/email';
 
 const router = Router();
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', { apiVersion: '2025-04-30.basil' as any });
+function getStripe(): Stripe | null {
+  const key = process.env.STRIPE_SECRET_KEY;
+  if (!key || key.startsWith('sk_test_your')) return null;
+  return new Stripe(key);
+}
+
 const APP_URL = process.env.APP_URL || 'http://localhost:3000';
 
 function generateRegNumber(db: any): string {
@@ -101,6 +106,11 @@ router.post('/:id/checkout', async (req: Request, res: Response) => {
   }
 
   // Stripe checkout
+  const stripe = getStripe();
+  if (!stripe) {
+    return res.status(503).json({ error: 'Stripe is not configured. Please set STRIPE_SECRET_KEY in .env' });
+  }
+
   try {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
