@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate, Link, useSearchParams } from 'react-router-dom';
 import { api } from '../lib/api';
 import { Loader2, CheckCircle, AlertCircle, ChevronRight, Calendar, MapPin, Clock, CreditCard, Building2, Banknote, Tag } from 'lucide-react';
 
@@ -10,6 +10,7 @@ const COUNTRIES = ['Singapore', 'Malaysia', 'Indonesia', 'Thailand', 'Philippine
 const Register = () => {
   const { courseId } = useParams();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [course, setCourse] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [step, setStep] = useState<Step>('form');
@@ -33,7 +34,11 @@ const Register = () => {
 
   useEffect(() => {
     if (!courseId) return;
-    api.getCourse(courseId).then(setCourse).catch(() => setError('Course not found')).finally(() => setLoading(false));
+    api.getCourse(courseId).then(data => {
+      setCourse(data);
+      const scheduleParam = searchParams.get('schedule');
+      if (scheduleParam) setSelectedSchedule(scheduleParam);
+    }).catch(() => setError('Course not found')).finally(() => setLoading(false));
   }, [courseId]);
 
   const availableSchedules = course?.schedules?.filter((s: any) => s.status !== 'Sold Out') || [];

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { COURSES } from '../constants';
+import { api } from '../lib/api';
 import { 
   Calendar, Clock, Download, CheckCircle, User, Award, 
   ArrowRight, X, Bell, Play, ChevronDown, ChevronUp,
-  Star, ShieldCheck, FileText, MonitorPlay, Building2, Server
+  Star, ShieldCheck, FileText, MonitorPlay, Building2, Server, Loader2
 } from 'lucide-react';
 import { Instructor, Schedule } from '../types';
 import CourseCard from '../components/CourseCard';
@@ -20,13 +21,27 @@ const getUserTimezone = () => {
 
 const CourseDetail = () => {
   const { id } = useParams();
-  const course = COURSES.find(c => c.id === id);
+  const [course, setCourse] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
   const [activeSection, setActiveSection] = useState('overview');
-  const [modalInstructor, setModalInstructor] = useState<Instructor | null>(null);
+  const [modalInstructor, setModalInstructor] = useState<any>(null);
   const [openCurriculumDay, setOpenCurriculumDay] = useState<number | null>(0);
   
   // Selection State
-  const [selectedSchedule, setSelectedSchedule] = useState<Schedule | null>(null);
+  const [selectedSchedule, setSelectedSchedule] = useState<any>(null);
+
+  // Fetch course from API, fallback to static constants
+  useEffect(() => {
+    if (!id) return;
+    api.getCourse(id)
+      .then(data => setCourse(data))
+      .catch(() => {
+        // Fallback to static data
+        const staticCourse = COURSES.find(c => c.id === id);
+        if (staticCourse) setCourse(staticCourse);
+      })
+      .finally(() => setLoading(false));
+  }, [id]);
 
   // Modals
   const [showSyllabusModal, setShowSyllabusModal] = useState(false);
@@ -41,9 +56,7 @@ const CourseDetail = () => {
   const [isWaitlistSubmitted, setIsWaitlistSubmitted] = useState(false);
 
   // Related Courses
-  const relatedCourses = course?.relatedCourseIds 
-    ? COURSES.filter(c => course.relatedCourseIds.includes(c.id))
-    : [];
+  const relatedCourses: any[] = [];
 
   const userTimezone = getUserTimezone();
 
@@ -79,6 +92,10 @@ const CourseDetail = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  if (loading) {
+    return <div className="min-h-screen flex items-center justify-center"><Loader2 size={40} className="animate-spin text-mci-teal" /></div>;
+  }
 
   if (!course) {
     return <div className="p-20 text-center text-mci-text font-bold text-xl">Course not found.</div>;
@@ -217,7 +234,7 @@ const CourseDetail = () => {
            <nav className="flex text-xs text-gray-500">
              <Link to="/" className="hover:text-mci-teal">Home</Link>
              <span className="mx-2">/</span>
-             <Link to={`/programs/${course.category.toLowerCase().replace(' ', '-')}`} className="hover:text-mci-teal">{course.category}</Link>
+             <Link to={`/programs/${(course.program || course.category || '').toLowerCase().replace(' ', '-')}`} className="hover:text-mci-teal">{course.program || course.category}</Link>
              <span className="mx-2">/</span>
              <span className="text-gray-800 font-medium">{course.code} Certification</span>
            </nav>
@@ -234,7 +251,7 @@ const CourseDetail = () => {
             <div className="animate-in slide-in-from-bottom-4 duration-700 mb-12">
                <div className="flex flex-wrap gap-3 mb-4">
                 <span className="bg-mci-teal/10 text-mci-teal px-3 py-1 text-xs font-bold uppercase tracking-wider rounded border border-mci-teal/20 flex items-center gap-1.5">
-                  <Server size={14} /> {course.category}
+                  <Server size={14} /> {course.program || course.category}
                 </span>
                 <span className="bg-green-50 text-green-700 px-3 py-1 text-xs font-bold uppercase tracking-wider rounded border border-green-200 flex items-center gap-1">
                   <CheckCircle size={12} /> Guaranteed to Run
@@ -275,7 +292,13 @@ const CourseDetail = () => {
             {/* Sticky Tabs (Within Left Column) */}
             <div className="sticky top-20 z-30 bg-white border-b border-gray-200 mb-8 -mx-4 px-4 md:mx-0 md:px-0">
                <div className="flex overflow-x-auto no-scrollbar gap-8">
-                {['Overview', 'Curriculum', 'Instructor', 'Reviews', 'Schedules'].map((section) => (
+                {[
+                  'Overview',
+                  ...(course.curriculum?.length > 0 ? ['Curriculum'] : []),
+                  ...(course.instructor ? ['Instructor'] : []),
+                  ...(course.reviews?.length > 0 || course.reviewStats?.total > 0 ? ['Reviews'] : []),
+                  ...(course.schedules?.length > 0 ? ['Schedules'] : []),
+                ].map((section) => (
                   <button
                     key={section}
                     onClick={() => scrollToSection(section.toLowerCase())}
@@ -331,6 +354,7 @@ const CourseDetail = () => {
               </section>
 
               {/* Curriculum */}
+              {(course.curriculum?.length > 0) && (
               <section id="curriculum" className="scroll-mt-40">
                  <div className="flex justify-between items-end mb-6">
                   <h2 className="text-2xl font-bold text-mci-text">Course Curriculum</h2>
@@ -371,13 +395,19 @@ const CourseDetail = () => {
                   ))}
                 </div>
               </section>
+              )}
 
               {/* Instructor */}
+              {course.instructor && (
               <section id="instructor" className="scroll-mt-40">
                  <h2 className="text-2xl font-bold text-mci-text mb-6">Meet Your Instructor</h2>
                  <div className="bg-white border border-gray-200 rounded-lg p-8 flex flex-col sm:flex-row gap-8 items-start hover:shadow-md transition-shadow cursor-pointer" onClick={() => setModalInstructor(course.instructor)}>
                     <div className="flex-shrink-0">
-                      <img src={course.instructor.imageUrl} alt={course.instructor.name} className="w-24 h-24 rounded-full object-cover shadow-sm border-4 border-gray-50" />
+                      {course.instructor.imageUrl ? (
+                        <img src={course.instructor.imageUrl} alt={course.instructor.name} className="w-24 h-24 rounded-full object-cover shadow-sm border-4 border-gray-50" />
+                      ) : (
+                        <div className="w-24 h-24 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 border-4 border-gray-50"><User size={36} /></div>
+                      )}
                     </div>
                     <div className="flex-1">
                       <div className="flex justify-between items-start">
@@ -393,8 +423,10 @@ const CourseDetail = () => {
                     </div>
                  </div>
               </section>
+              )}
 
               {/* Reviews */}
+              {(course.reviews?.length > 0 || course.reviewStats?.total > 0) && (
               <section id="reviews" className="scroll-mt-40">
                  <h2 className="text-2xl font-bold text-mci-text mb-6">Student Reviews</h2>
                  <div className="bg-gray-50 rounded-lg p-6 flex flex-col md:flex-row gap-8 items-center mb-8">
@@ -440,8 +472,10 @@ const CourseDetail = () => {
                     ))}
                  </div>
               </section>
+              )}
 
               {/* Schedules */}
+              {(course.schedules?.length > 0) && (
               <section id="schedules" className="scroll-mt-40">
                   <h2 className="text-2xl font-bold text-mci-text mb-6">Upcoming Dates</h2>
                   <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
@@ -452,7 +486,7 @@ const CourseDetail = () => {
                       <div className="text-right">Action</div>
                    </div>
                    <div className="divide-y divide-gray-100">
-                      {course.schedules.map(schedule => {
+                      {(course.schedules || []).map((schedule: any) => {
                          const isSelected = selectedSchedule?.id === schedule.id;
                          return (
                            <div key={schedule.id} className={`grid grid-cols-4 p-4 items-center transition-colors ${isSelected ? 'bg-blue-50' : 'hover:bg-gray-50'}`}>
@@ -492,6 +526,7 @@ const CourseDetail = () => {
                    </div>
                 </div>
               </section>
+              )}
 
             </div>
           </div>
@@ -527,29 +562,32 @@ const CourseDetail = () => {
                             <div className="text-xs font-bold text-blue-800 uppercase mb-1">Session Selected</div>
                             <div className="text-sm font-bold text-gray-900">{new Date(selectedSchedule.startDate).toLocaleDateString()} - {selectedSchedule.location}</div>
                          </div>
-                      ) : (
-                        <div className="text-xs text-gray-500 italic mb-4 text-center">Select a date from the schedule to enroll</div>
-                      )}
+                      ) : course.schedules?.length > 0 ? (
+                        <div className="text-xs text-gray-500 italic mb-4 text-center">Select a date from the schedule below, or enroll directly</div>
+                      ) : null}
 
                       <div className="space-y-3 mb-6">
                         <button 
-                          disabled={!selectedSchedule}
-                          className={`w-full py-4 rounded-lg font-bold text-lg shadow-lg transition-all active:scale-[0.98] flex items-center justify-center gap-2 ${
-                              selectedSchedule 
-                                ? 'bg-mci-amber hover:bg-yellow-500 text-white' 
-                                : 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                          }`}
+                          className="w-full py-4 rounded-lg font-bold text-lg shadow-lg transition-all active:scale-[0.98] flex items-center justify-center gap-2 bg-mci-amber hover:bg-yellow-500 text-white"
                           onClick={() => {
-                             if(!selectedSchedule) {
+                             if(selectedSchedule) {
+                                window.location.href = `/register/${course.id}?schedule=${selectedSchedule.id}`;
+                             } else if (course.schedules?.length > 0) {
+                                // Has schedules but none selected — scroll to schedules section
                                 document.getElementById('schedules')?.scrollIntoView({behavior: 'smooth'});
+                             } else {
+                                // No schedules — go directly to register
+                                window.location.href = `/register/${course.id}`;
                              }
                           }}
                         >
                           <Calendar size={20} />
-                          {selectedSchedule ? 'Proceed to Checkout' : 'View Schedule & Enroll'}
+                          {selectedSchedule ? 'Proceed to Checkout' : course.schedules?.length > 0 ? 'Select Date & Enroll' : 'Enroll Now'}
                         </button>
                         
-                        <button className="w-full py-3.5 rounded-lg font-bold text-mci-text border-2 border-mci-maroon hover:bg-mci-maroon hover:text-white transition-colors flex items-center justify-center gap-2">
+                        <button 
+                          onClick={() => window.location.href = '/contact?type=corporate'}
+                          className="w-full py-3.5 rounded-lg font-bold text-mci-text border-2 border-mci-maroon hover:bg-mci-maroon hover:text-white transition-colors flex items-center justify-center gap-2">
                           <Building2 size={18} /> Request Corporate Quote
                         </button>
                       </div>
